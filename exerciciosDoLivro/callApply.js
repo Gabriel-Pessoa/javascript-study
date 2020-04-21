@@ -5,7 +5,7 @@ function getPreco (imposto = 0, moeda = 'R$') {
 const produto = {
     nome : 'Notebook',
     preco : 4589 , 
-    desc:0.15 ,
+    desc: 0.15 ,
     getPreco // função add no obj produto, como não utilizei ':', ele atribui a função a ela mesma
 }
 
