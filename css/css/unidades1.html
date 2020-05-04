@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Unidades #01</title>
+    <style>
+        
+        
+        .unidades-absolutas {
+            position: absolute; /*a partir do position absolute ele aplica top e left*/
+            font-size: 40px;
+            padding: 20px;
+            border: solid 5px #222;
+            width: 4cm ; /*unidade de medida pouco usada*/
+            height: 20mm; /*unidade de medida pouco usada*/
+            top: 150px; /*distância do topo da página */
+            left: 200px; /*distância da esquerda*/
+        }
+
+        /*unidades relativas variam de acordo com a escolha do usuário do tamanho da fonte. Isso 
+        cria um ideia mais técnica do seu site no usuário*/
+        .unidades-relativas {
+            position: absolute;
+            font-size: 4em;
+            padding: 5%; /*aumenta a partir das dimensões do browser*/
+            border: solid 1vw #222; /* 1% da largura, acompanha o crescimento da vw */
+            margin: .8%;
+            height: 15vh;
+            bottom: 5%;
+            right: 5%;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div class="unidades-absolutas">Opa!</div>
+    <div class="unidades-relativas">Epa!</div>
+</body>
+
+</html>

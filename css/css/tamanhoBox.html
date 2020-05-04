@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Tamanho Box</title>
+    <style>
+
+        /* para aplicar o conceito de border box ou content-box em todas as tags
+        é só usar o seletor universal
+        
+        * {
+            box-sizing: border-box;
+        }
+
+        */
+
+        body {
+            font-size: 45px;
+            margin: 0;
+        }
+
+        div {
+            background-color: deepskyblue;
+            width: 100%; /*Podemos alterar para percentual ou valor fixo em px, o box-sizing irá manter esse tamanho*/
+            height: 300px;
+            padding: 100px;
+            border: solid 20px;
+            /* o conteúdo tem 100%,
+             só que o padding e a borda extrapolam esse valor grando a barra de rolagem*/
+            box-sizing: content-box;
+            /* o conteúdo 100% inclui o conteúdo, margin e a borda*/
+            box-sizing: border-box; 
+        }
+
+
+    </style>
+</head>
+<body>
+    <div>
+        O tamanho do Box é...
+    </div>
+</body>
+</html>

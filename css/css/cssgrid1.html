@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Grid #01</title>
+    <style>
+        /* https://caniuse.com/#feat=css-grid */
+        
+        html,
+        body {
+            margin: 20px;
+            height: calc(100% - 40px);
+            background-color: lightgray;
+        }
+        
+        div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            border: solid 5px dodgerblue;
+            background: #fff;
+        }
+
+        body {
+            display: grid;
+            grid-template-columns: 50% 50%; /* duas colunas com tamanho metade do tamanho cada*/
+            /*4 colunas que se repetem 3 vezes com 8.33% cada de width da tela*/
+            grid-template-columns: repeat(4, 8.33% 8.33% 8.33% );
+            /*4 colunas que se repete apenas 1 vez, com 8.33% dde width*/
+            grid-template-columns: repeat(4, 8.33%);
+            /*11 colunas com width de 100px cada, mais uma coluna por fora de 150px */
+            grid-template-columns: repeat(11, 100px) 150px;
+            /*outra função interessante é o minmax(100px, 300px) define um intervalo*/
+            /*3 colunas: 1º 200px fixo, 2º 20% e 3º* o restante*/
+            grid-template-columns: 200px 20% 1fr;
+            grid-template-columns: 3fr 6fr 3fr;
+            /*para linhas: 1ºlinha:50% , 2º 25% , 3º 12.5% , 4º 12.5% */
+            grid-template-rows: 50% 25% 12.5% 12.5%;
+            /*1º linha:100px fixo, 2º 1fr, o restante é espremido ao máximo*/
+            grid-template-rows: 100px 1fr;
+            /*a primeira linha é fixa, a as restante são divididas de forma igualitária*/
+            grid-template-rows: 100px auto auto auto;
+        }
+
+        .d8 {
+            /*essa classe começa na coluna 2 e termina na 4*/
+            grid-column-start: 2;
+            grid-column-end: 4;
+            /*outra forma de fazer o mesmo de cima. Ou seja espanda 2 coluna */
+            grid-column-end: span 2;
+            grid-row-start: 3; 
+            grid-row-end: 5;
+            grid-row-end: span 2; /*outra forma de escrever as duas linhas acima */
+        }
+
+        .d10, 
+        .d11 {
+            /* podem se sobrepor */   
+            grid-column-start: 1;
+            grid-column-end: 3; /*até aqui não houve uma sobreposição, simplesmente ele jogou o conteúdo para baixo */
+            /*agora se colocarmos elementos nas mesmas linhas e colunas, aí sim vai haveruma sobreposição*/
+            grid-row-start: 5;
+            grid-row-end: 6;
+            grid-row-end: span 1;/*a mesma forma de escrever as duas linhas acima*/  
+        }
+
+        .d10 {
+            /*profundidade dos elementos, posso trazer o d10 para frente do  d11*/
+            /* z-index >= 0 o elemento passa a frente do outro */
+            z-index: 0; 
+            z-index: -1; /*o elemento fica abaixo do elemento*/
+        }
+
+
+
+    </style>
+</head>
+
+<body>
+    <div class="d1">1</div>
+    <div class="d2">2</div>
+    <div class="d3">3</div>
+    <div class="d4">4</div>
+    <div class="d5">5</div>
+    <div class="d6">6</div>
+    <div class="d7">7</div>
+    <div class="d8">8</div>
+    <div class="d9">9</div>
+    <div class="d10">10</div>
+    <div class="d11">11</div>
+    <div class="d12">12</div>
+</body>
+
+</html>

@@ -21,7 +21,7 @@ const getTurma = letra => {
     })
 }
 
-// Recurso do ES8
+// Recurso do ES8 (Async / Await)
 // Objetivo simplicar 
 
 let obterAlunos = async () => { // Precisamos marcar a função com a palavra async, senão o await não funciona e dá um erro

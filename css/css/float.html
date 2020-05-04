@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Float</title>
+    <style>
+
+
+        body {
+            background-color: #222;
+        }
+
+        .c1 {
+            background-color: red;
+            float: right; /*o elemento flua, porém os outros elementos desconsideram essa linha de flutação*/
+        }
+
+        .c2 {
+            background-color: green;
+            clear: right; /* o elementos após o elemento 1 não ocupa a mesma linha*/
+            float: left;
+        }
+        
+        .c3 {
+            background-color: blue;
+            clear: both; /*desconsidera os dois lados*/
+        }
+
+        .c4 {
+            background-color: orange;
+            float: right;
+        }
+
+        div {
+            height: 150px;
+            width: 150px;
+           /* float: right; o primeiro elemento ocupa o primeiro lugar da direita e assim sucessivamente*/
+
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div class="c1"></div>
+    <div class="c2"></div>
+    <div class="c3"></div>
+    <div class="c4"></div>
+</body>
+
+</html>

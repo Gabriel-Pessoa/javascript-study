@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Especificidade CSS</title>
+    <style>
+        /* https://developer.mozilla.org/pt-BR/docs/Web/CSS/Specificity */
+        /*
+            Em linhas gerais, critério de prioridade: ...
+
+            1. regra com !important: Não é uma boa prática 
+            2. Seletores mais específicos
+            3. última regra processada em caso de empate
+        */
+
+        /* tag é mais genérico*/
+        p {
+            background-color: #aaa;     
+        }
+
+        /*class é mais específico, por isso esse tem mais força, mesmo que ele seja processado primeiro que o acima
+        , ele ganha no critério de especificidade. Aplicando um !important*/
+        .observacao {
+            background-color: #5F5;
+            border: dashed 5px;
+            padding: 200px!important;
+            font-size: 40px;
+        }
+
+        /* ganha porque é mais específico */ 
+        p.observacao {
+            padding: 5px 60px;
+            background: linear-gradient(to right, red, yellow);
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <p class='observacao'>Olha essa observação!!!!</p>
+</body>
+
+</html>

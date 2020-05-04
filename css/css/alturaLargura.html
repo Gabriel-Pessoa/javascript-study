@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Altura e Largura</title>
+    <style>
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            font-size: 40px;
+            background-color: coral;
+            height: 100%; /*temos que alterar o html para que ele tenha margem para crescer*/
+            margin: 0;
+        }
+
+        div {
+            background-color: seagreen;
+        }
+
+        span {
+            background-color: dodgerblue;
+        }
+
+        span, div {
+            width: 50%; /* span não vem por padrão display block. Inline não vai considerar largura 
+            Como ambos estão dentro do body e a largura dele por padrão ocupada toda a página, valoresw em percenturais vão funcionar */ 
+            
+            height: 50%; /*Não considerou, pq ele tem que pegar 50% de alguém que ele está
+            dentro no caso o body. Se colocarmos valores absolutos em pixels por exemplos,
+            ele funciona pois é somado o valor absoluto ao body */
+            display: inline-block
+       
+        }
+
+    </style>
+</head>
+
+<body>
+    <div>Título</div><!--Cuidado com esse espaço entre as tags, 
+        para no display inline-block ele caiba um do lado do outro sem margem
+    --><span>Subtítulo</span>
+</body>
+
+</html>

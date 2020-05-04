@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Positions</title>
+    <style>
+
+        /* .content {
+            position: relative;
+            top: 100px;
+            left: 100px;
+        } */
+        
+
+        div {
+            font-size: 40px;
+            border: 2px solid black;
+            margin-bottom: 5px;
+        }
+        
+       /*posição padrão, não consegue alterar sua posição na página*/
+        #static {
+            position: static;
+            background: yellow;
+        }
+
+        /*pode modificar sua posição final
+         em relação ao conteúdo anterior e/ou seu container*/
+        #relative {
+            position: relative;
+            background-color: blue;
+            top: 30px;
+            left: 30px;
+        }
+
+        /*Um elemento absolutamente posicionado não existe mais no fluxo normal do layout do documento. Em vez disso, fica em sua própria camada,
+         separada de todo o resto. Significa que podemos criar recursos isolados da interface do usuário que não interfiram na posição de outros elementos na página.
+         Ex: caixas de informações pop-up e menus de controle*/
+         /*relacionada a viewport*/
+        #absolute {
+            background-color: green;
+            position: absolute;
+            /*top, bottom, left e right se comportam de forma diferente. Em vez de especificar a direção em que o elemento deve se mover, 
+            eles especificam a distância que o elemento deve estar dos lados de cada elemento que o contém.*/
+            top: 30px;
+            left: 30px;
+
+        }
+
+        #fixed {
+            position: fixed;
+            top: 300px;
+            right: 100px;
+            background-color: orange;
+        }
+
+        #bottom {
+            position: absolute;
+            top: 1000px;
+            left: 50%;
+            width: 10%;
+            height: 10%;
+        }
+
+        #stick {
+            position: sticky;
+            top: 0px;
+            padding: 50px;
+            background-color: orangered;
+        }
+
+
+    </style>
+</head>
+
+<body>
+        <div id="static">Static</div>
+        <div id="relative">Relative</div>
+        <div id="absolute">Absolute</div>
+        <div id="fixed">Fixo</div>
+        <div id="stick">Stick</div>
+        <div id="bottom"><div>A</div></div>
+</body>
+
+</html>

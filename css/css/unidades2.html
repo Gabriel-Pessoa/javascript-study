@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Unidades #02</title>
+    <style>
+
+
+        .fora {
+            position: relative;
+            background-color: orange;
+            height: 400px;
+            width: 400px;
+            padding: 50px;/*400 px + 50px de padding de cada lado = 500px² */
+        }
+
+        /* ocupa toda a área do conteúdo da div acima subtraindo o padding */
+        .dentro {
+            background-color: mediumvioletred;
+            height: 100px;
+            width: 100%; /*100% do conteúdo*/
+            position: static; /*em relação ao conteúdo*/
+            position: relative; /*em relação ao conteúdo*/
+            position: absolute; /*conteúdo + padding*/
+            position: fixed; /*em relação ao viewport*/
+        }
+
+
+    </style>
+</head>
+<body>
+    <!--Por padrão a div já tem largura 100% (display: block), a altura ela assume 
+        o tamanho do conteúdo-->
+    <div class="fora">
+        <div class="dentro"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,5 @@
+1)Inicia servidor sem cacheamento em todos os arquivos a partir do local:
+http-server -c-1 .
+
+2)Abrir o preview:
+ctrl+shft+v

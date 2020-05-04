@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Flexbox #03</title>
+    <link rel="stylesheet" href="css/tag.css">
+    <style>
+
+      .flex-container {
+          display: flex;
+          flex-direction: row; /*default*/
+          /*flex-direction: row;
+            flex-direction: column;
+            definimos o sentido do main axis*/
+      }
+
+      .flex-container div {
+          /*propriedade principal para definir a largura dos itens dentro da flex box
+          Devemos definir o sentindo do main axis, por padrão é row, ele irá crescer nesse sentido*/
+          flex-basis: 100px;
+          width: 200px; /*flex-basis é mais forte, funciona se flex-basis não tiver presente*/
+      }
+
+      .flex-container div:nth-child(4) {
+          /*propriedade Shorthand: grow shrink basis */
+          flex: 3 6 100px;
+      }
+
+      .flex-container {
+          /*o comportamento do quarto elemento muda pois foi alterado na propriedade flex acima*/
+          width: 300px;
+          width: 600px;
+      }
+
+
+    </style>
+</head>
+
+<body>
+    <div class="flex-container tag nolabel">
+        <div class="tag nolabel">1</div>
+        <div class="tag nolabel">2</div>
+        <div class="tag nolabel">3</div>
+        <div class="tag nolabel">4</div>
+    </div>
+    <script src="js/tag.js"></script>
+</body>
+
+</html>

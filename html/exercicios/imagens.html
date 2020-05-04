@@ -1,0 +1,110 @@
+<div wm-slider>
+
+    <p>
+        <img src="http://files.cod3r.com.br/curso-web/imagem1.jpg" alt="Muro da Cidade" width="513" height="342"
+            title="Muro da Cidade por Tarso Bessa">
+    </p>
+
+    <p>
+        <img src="http://files.cod3r.com.br/curso-web/imagem2.gif" alt="Intro Cod3r" height="342">
+    </p>
+
+    <p class="circular">
+        <img src="http://files.cod3r.com.br/curso-web/imagem3.png" alt="Rio de Janeiro" height="342">
+    </p>
+
+    <p class="texto">
+        <img src="http://files.cod3r.com.br/curso-web/avatar.jpg" alt="Avatar" height="50" align="left">
+        <!--Alinhamento a esquerda-->
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Nisi doloremque laudantium iure odit dolor dolorum, enim esse cumque quibusdam dolore possimus distinctio cum
+        dignissimos impedit quis maiores quae.
+        Ipsum, numquam. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+        Velit alias incidunt pariatur amet ducimus atque suscipit doloremque ipsa porro quaerat.
+    </p>
+
+    <p class="cidade"></p>
+
+    <p>
+        <!--Podemos usar critérios para essas imagens-->
+        <picture>
+            <source srcset="http://files.cod3r.com.br/curso-web/logo-larga.png" media="(min-width: 600px)">
+            <!--Critério é que se a imagem não tiver o width de no mínimo 600px-->
+            <img src="http://files.cod3r.com.br/curso-web/logo-estreita.png" alt="Logo">
+        </picture>
+    </p>
+
+</div>
+
+<style>
+    p {
+        position: absolute ;  
+        display: none;
+    }
+    
+    .circular {
+        width: 513px;
+        background-color: #444;
+    }
+
+    .texto {
+        width: 400px;
+
+    }
+
+    .texto img {
+        margin-right: 10px;
+    }
+
+    .cidade {
+        width: 513px;
+        height: 342px;
+        background-image: url('http://files.cod3r.com.br/curso-web/imagem4.jpg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 200%;
+    }
+</style>
+
+<script>
+
+    function mover(elem, inicio, fim, passo, callback) {
+       const novoInicio = inicio - passo
+       if(novoInicio >= fim) {
+           elem.style.left = novoInicio + 'px'
+           setTimeout(() => mover(elem, novoInicio, fim, passo, callback), 7)
+       } else {
+           callback()
+       }
+    }
+
+   
+    function slider() {
+        const elementos = document.querySelectorAll('[wm-slider] > p') //querySelectorAll transforma em uma node list, temos que usar uma propriedade do node Array.from
+        const slides = Array.from(elementos) // converti nodeList em array
+        exibirSlide(slides, slides[0])
+        
+    }
+
+    function exibirSlide(slides, slide) {
+        slide.style.display = 'block'
+
+        const inicio = innerWidth // determina a largura da tela atual
+        const fim = -slide.clientWidth // -slide.clientWidth determina a largura do p, e vai até que ela suma totalmente da tela
+
+        slide.style.left = `${inicio}px`
+
+        mover(slide, inicio, fim, 5, () => {
+            slide.style.display = 'none'
+            exibirSlide(slides, getProximo(slides, slide))
+        })
+    }
+
+    function getProximo(lista, atual) {
+        const i = lista.indexOf(atual) + 1 //indexOf compara o elementoDePesquisa com os elementos do Array usando igualdade estrita 
+        return i < lista.length ? lista[i] : lista[0] // se o índice i for maior que o array, retorna lista[0]
+    }
+
+    slider()
+
+</script>

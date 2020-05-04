@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Texto</title>
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+    <style>
+        /* ... */
+
+        * {
+            margin: 0;
+        }
+
+        html {
+           font-size: 28px; 
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        div {
+            font-size: 50px; /*no estilo p, a font-size: 2em será o dobro de 50px*/
+        }
+
+        p {
+            /*valores padrões*/
+            font-size: 1em;
+            font-size: 100%;
+            font-size: 16px;
+            font-size: 12pt;
+            /*todos acima são equivalentes*/
+
+
+            /*unidades absolutas*/
+            font-size: 100px; /*tamanho do pixel é relativo em relação a tela*/
+            font-size: 72pt; /*pontos*/
+            font-size: 1in; /*polegada*/
+
+
+            /*unidades relativas*/
+            font-size: 2.2em; /*em relação a tag pai, se a div não for definido, pegará do browser*/
+            font-size: 2.2rem ; /*fonte maior 2.2x a referência da raiz (html)*/
+            font-size: 50vh;
+            font-size: 10vw;
+
+            /*font-family*/
+            font-family: monospace;
+            font-family: Georgia, serif; /*ideia de alternativa, se um não funcionar, utilize o outro*/
+            font-family: Verdana, sans-serif;
+            font-family: 'Indie Flower', cursive;
+
+            /*espessura da fonte*/
+            font-weight: 900;
+            
+           
+            font-style: italic;
+            text-transform: uppercase;
+            /* text-decoration: overline underline line-through; */
+            word-spacing: -50px; /*espaço entre as palavras*/
+            letter-spacing: 20px; /*espaço entre as letras*/
+            line-height: 2.5em; /*espaço entre as linhas*/
+            text-align: center; /*alinhamento texto*/
+        }
+
+        .botao { 
+            font-size: 20px;
+            text-decoration: none;
+            padding: 10px 30px;
+            border-radius: 25px;
+        }
+
+        .destaque {
+            color: #fff;
+            background:tomato;
+            box-shadow: 2px 2px 1px 1px #000;
+        }
+
+        /*ao clicar*/
+        .destaque:active {
+            box-shadow: none;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div>
+        <p>
+            Que texto
+            <br>legal!!!
+        </p>
+    </div>
+    <a href="http://google.com" class="botao destaque">Google</a>
+</body>
+
+</html>

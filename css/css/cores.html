@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cores</title>
+    <style>
+        /* 
+            https://www.w3schools.com/colors/colors_hsl.asp
+            
+            https://coolors.co/
+            http://paletton.com/
+        */
+
+        body {
+            background-color: green; /*nome da cor */ 
+
+            /* hexadecimal que vai de 0 até ff. red: f6, green: 78, blue: 09*/
+            /* background-color: #f67809  */
+            
+            /*careteres de cores repetidos podem ser simplificados. ex: #aabbcc*/
+            background-color: #abc;
+
+            /*aplicando transparência nos dois últimos números. ex:#edc912"ff" transparência em ff,ou seja, cor sem transparência
+            ou 00 transparência completa*/
+            background-color: #edc912;
+
+            /*simplificando as cores mais transparência. rgb mais transparência*/
+            /* background-color:#e928 */
+
+            /*usando função na base decimal de 0 a 255*/
+            background-color: rgb(55, 110, 220);
+
+            /*função rgb mais transparência. Base decimal nas cores de 0 a 255; e 
+            transparência de 0 a 1, onde zero é transparência total */
+            background-color: rgba(55, 110, 220, .5);/* .5 = 50% de transparência */
+
+            /*padrão hsl*/
+            background-color: hsl(299, 58%, 50%);
+
+            /*padrão hsl com transparência*/
+            background-color: hsla(299, 58%, 50%, 0.5);
+        
+        }
+
+        div {
+            font-size: 100px;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <h1>teste</h1>
+
+    <div>
+        <!--h1 por está dentro da div que foi setada com font-size 100px, e ter por padrão
+        font-size: 2em, terá então 200px de font.-->
+        <h1>teste</h1>
+    </div>
+</body>
+
+</html>

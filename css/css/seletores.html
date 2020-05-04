@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Selectors</title>
+    <link rel="stylesheet" href="css/tag.css">
+    <style>
+
+        /* (*) seletor universal, seleciona todos
+        * {
+            color: #ff0;
+            background-color: #f77;
+        }
+        */
+
+        /* seletor de classe. 
+       .tag {
+            color: #ff0;
+            background-color: #f77;
+        } 
+        */
+
+        /*seletor de id
+       #aprovados {
+            color: #ff0;
+            background-color: #f77;
+        } 
+        */
+
+        /* pegar o elemento div que esteja diretamente dentro desse elemento #aninhado.
+        Descendente direto. 
+        #aninhado > div {
+            color: #ff0;
+            background-color: #f77;
+        }
+        */
+
+        /*Não funciona porque o section não é um filho direto de #aninhado 
+        #aninhado > section {
+            color: #ff0;
+            background-color: #f77;
+        }
+        */
+
+        /*mundando o caso de cima por esse de baixo. Qualquer descendente de #aninhado do 
+        tipo section 
+        #aninhado section {
+            color: #ff0;
+            background-color: #f77;
+        }
+        */
+
+        /* outro seletor elem + elem. Seletor de adjacent sibling, irmãos adjancentes um está
+        logo em seguida do outro. Na página tem alguma "ul" que antes dela seguida tem um "p" 
+        p + ul {
+            color: #ff0;
+            background-color: #f77;
+        }
+        */
+        
+        /* Não funciona porque um não está do lado do outro
+        p + ol {
+            color: #ff0;
+            background-color: #f77;
+        }
+        */
+
+        /*Fazendo uma alteração. General sibling, irmãos de forma mais geral. O pai
+        é uma div tanto de "p" quanto de "ol", e "ol" está dentro de "p" 
+        p ~ ol {
+            color: #ff0;
+            background-color: #f77; 
+        }
+        */
+        /*selecionando atributos personalizados.
+        [feira] {
+            color: #ff0;
+            background-color: #f77;  
+        }
+        */
+
+        /*selecionando atributos personalizados quando eles tiverem determinados valores
+        [feira=casa] {
+            color: #ff0;
+            background-color: #f77;  
+        }
+        */
+        /* não funciona, pois o atributo é "escritorio empresa". Existe alterações para que funcione
+        [feira=escritorio] {
+            color: #ff0;
+            background-color: #f77;  
+        }
+        */
+
+        /*alteração 1 com (~). Vai pegar possíveis elementos dentro escritorio separado por espaço,
+        se tiver vírgula não funciona
+        [feira~=escritorio] {
+            color: #ff0;
+            background-color: #f77;  
+        }
+        */
+
+        /*alteração 2 com (*). Dentro do seletor personalizado "feira" pegue todos os atributos que tenham (sa), ex: ca'sa' e empre'sa'
+        [feira*=sa] {
+            color: #ff0;
+            background-color: #f77;  
+        }
+        */
+
+        /* o primeiro filho de um elemento que seja uma span 
+        span:nth-child(1) {
+            c  
+        }
+        */
+
+        /* Dentro de uma section me dê todos os filhos ímpares(odd) ou pares (even) ou primeiro elemento
+        section > :nth-child(odd) {
+            color: #ff0;
+            background-color: #f77;  
+        }
+        */
+        /*Me dê um segundo elemento dentro da section que seja uma span*/
+        section > span:nth-of-type(2) {
+            color: #ff0;
+            background-color: #f77;  
+        }
+
+
+
+
+    </style>
+</head>
+
+<body>
+    <div class='tag'>
+        <div class='tag'>
+            <p class='tag'>1</p>
+            <ul class='tag' feira='casa'>
+                <li>Arroz</li>
+                <li>Feijão</li>
+            </ul>
+            <ul class='tag' feira='escritorio empresa'>
+                <li>Café</li>
+                <li>Água</li>
+            </ul>
+            <ol id='aprovados' class='tag'>
+                <li>Maria</li>
+                <li>Pedro</li>
+                <li>Ana</li>
+            </ol>
+            <div id='aninhado' class='tag'>
+                <div class="tag">
+                    <section class='tag nolabel'>
+                        <span class='tag'>1</span>
+                        <p class='tag'>2</p>
+                        <span class='tag'>3</span>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/tag.js"></script>
+</body>
+
+</html>

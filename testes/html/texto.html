@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indentação de Textos</title>
+    <style>
+        
+        body {
+            font-family: sans-serif;
+            font-size: 100%;
+        }
+
+        h1 {
+            /* letter-spacing: 6px; */
+        }
+
+        p {
+            /* text-align: justify; */
+            /* letter-spacing: 3px; */
+            /* text-transform: capitalize; a primeira letra de cada palavra fica 
+            maiúscula*/
+        }
+
+        td,
+        th {
+            border: 1px solid rgb(190, 190, 190);
+            padding: 10px;
+        }
+
+        td {
+            text-align: center;
+        }
+
+        /*Representa as linhas pares de uma tabela HTML: 2, 4, 6, etc.*/
+        tr:nth-child(even) {
+            background-color: #eee;
+        }
+
+        #superior th {
+            background-color: #696969;
+            color: #fff;
+        }
+
+        tr th {
+            background-color: #d7d9f2;
+        }
+
+        caption {
+            padding: 10px;
+            caption-side: bottom;
+            /* joga a legenda pra baixo*/
+            font-weight: bold;
+        }
+
+        table {
+            /*se as células dentro de uma <tabela> têm bordas compartilhadas ou separadas.*/
+            border-collapse: collapse;
+            /*bordas compartilhadas*/
+            border: solid 2px rgb(200, 200, 200);
+            /*específica o comportamento do espaçamento entre caracteres de texto.*/
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            /*80% do tamanho da fonte do body*/
+        }
+
+        table {
+            position: absolute;
+            /* left: 40%; */
+        }
+
+        #table {
+            display: flex;
+            height: 182px;
+            justify-content: center;
+        }
+
+        h2 {
+            text-decoration: underline;
+        }
+
+        h3 {
+            text-decoration: overline;
+        }
+
+        h4 {
+            text-decoration: line-through;
+        }
+
+        /* a.visited:visited {
+           color: pink;
+       }
+
+        a.no-visited:link {
+           color: green;
+       } 
+
+        a:active {
+           background-color: plum;
+       } */
+
+        a {
+            text-decoration: none;
+        }
+
+        /*a:hover {
+            text-transform: uppercase;
+            font-weight: bold;
+            color: blue;
+            background-color: yellow;
+        } */
+
+        .whitewine{
+            color:#ffbb00
+        }
+        .redwine {
+            color: #800000;
+        }
+        #c1-2 {
+            text-decoration: none;
+            color: red;
+        }
+        .benefit {
+            color: red;   
+        }
+
+        #democrats {
+            background: blue;
+        }
+
+        #republicans {
+            background: red;
+        }
+
+        #margin {
+            margin-top: 100px;
+            margin-left: 100px;
+            /*margin: shorthand*/
+        }
+
+        #padding {
+            background-color: orange;
+            padding-left: 120px;
+        }
+
+        #border {
+            width: max-content;
+            height: 50px;
+            border: 8px double blue;
+        }
+
+        #picture {
+            float: left;
+            margin-right: 8px;
+        }
+
+        #column1 {
+            float: left;
+            width: 33%;
+            text-align: left;
+            margin-right: 5px;
+            margin-bottom: 20px;
+            border: 1px solid black;
+        }
+
+        #column2 {
+            float: left;
+            width: 33%;  
+            text-align: left;
+            margin-right: 5px; 
+            border: 1px solid black;
+            margin-bottom: 20px;
+        }
+
+        #column3 {
+            float: left;
+            width: 33%;
+            text-align: left;
+            border: 1px solid black;
+            margin-bottom: 20px;
+        }
+
+        #picture2 {
+            float: left;
+        }
+
+        .floatstop {
+            clear: both;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <h1>Indentação de Textos</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est animi eveniet molestiae veniam velit
+        accusamus,
+        quod accusantium, pariatur numquam voluptatibus tenetur et laudantium labore dolor, temporibus quia eius
+        laboriosam
+        repellendus?</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est animi eveniet molestiae veniam velit
+        accusamus,
+        quod accusantium, pariatur numquam voluptatibus tenetur et laudantium labore dolor, temporibus quia eius
+        laboriosam
+        repellendus?</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est animi eveniet molestiae veniam velit
+        accusamus,
+        quod accusantium, pariatur numquam voluptatibus tenetur et laudantium labore dolor, temporibus quia eius
+        laboriosam
+        repellendus?</p>
+    <div id="table">
+        <table>
+            <caption>Estrelas de Futebol</caption>
+            <tr id="superior">
+                <th>Jogador</th>
+                <th>Globos</th>
+                <th>Notas</th>
+            </tr>
+            <tr>
+                <th>CR7</th>
+                <td>7</td>
+                <td>9.1</td>
+            </tr>
+            <tr>
+                <th>Messi</th>
+                <td>6</td>
+                <td>8.9</td>
+            </tr>
+            <tr>
+                <th>Neymar</th>
+                <td>0</td>
+                <td>8.2</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <h2>Este texto é sublinhado</h2>
+        <h3>Este texto é com linha em cima</h3>
+        <h4>Este texto é cortado por uma linha</h4>
+    </div>
+    <div>
+        <h2>Links</h2>
+        <a class="visited" href="">Este link foi visitado</a><br><br>
+        <a class="no-visited" href="" target="">Este link não foi visitado</a>
+    </div>
+    
+    <br><br>
+
+    <h2>Exemplo de classes:</h2>
+    <p>Uvas para vinho branco:</p>
+    <ul>
+        <li><a href="" class="whitewine">Riesling</a></li>
+        <li><a href="" class="whitewine">Chardonnay</a></li>
+        <li><a href="" class="whitewine">Pinot Blanc</a></li>
+    </ul>
+    <p>Uvas para vinho tinto:</p>
+    <ul>
+        <li><a href="" class="redwine">Cabernet Sauvignon</a></li>
+        <li><a href="" class="redwine">Merlot</a></li>
+        <li><a href="" class="redwine">Pinot Noir</a></li>
+    </ul>
+    
+    <br><br>
+
+    <h1 id="c1">Capítulo 1</h1>
+    <h2 id="c1-1">Capítulo 1.1</h2>
+    <h2 id="c1-2">Capítulo 1.2</h2>
+    <h1 id="c2">Capítulo 2</h1>
+    <h2 id="c2-1">Capítulo 2.1</h2>
+    <h3 id="c2-1-2">Capítulo 2.1.2</h3>
+
+    <br><br>
+
+    <h2>Exemplo com span</h2>
+    <p>Dormir cedo e acordar cedo faz o homem saudável, rico e sábio.</p>
+    <p>Dormir cedo e acordar cedo faz o homem <span class="benefit">saudável, rico e sábio.</span></p>
+
+    <br><br>
+
+    <h2>Exemplo com div</h2>
+    <div id="democrats">
+        <ul>
+            <li>Franklin D. Roosevelt</li>
+            <li>Harry S. Truman</li>
+            <li>John F. Kennedy</li>
+            <li>Lyndon B. Johnson</li>
+            <li>Jimmy Carter</li>
+            <li>Bill Clinton</li>
+        </ul>
+    </div>
+    <div id="republicans">
+        <ul>
+            <li>Dwight D. Eisenhower</li>
+            <li>Richard Nixon</li>
+            <li>Gerald Ford</li>
+            <li>Ronald Reagan</li>
+            <li>George Bush</li>
+            <li>George W. Bush</li>
+        </ul>
+    </div>
+
+    <br><br>
+
+    <h1>Article 1:</h1>
+
+    <p>All human beings are born free
+        and equal in dignity and rights.
+        They are endowed with reason and conscience
+        and should act towards one another in a
+        spirit of brotherhood</p>
+
+    <div id="margin">
+       <h1>Documento com margens</h1> 
+       
+       <p>Iste quidem veteres inter ponetur honeste, qui vel mense brevi vel toto est iunior anno.
+        Utor permisso, caudaeque pilos ut equinae paulatim vello unum, demo etiam unum, dum cadat elusus ratione ruentis acervi, qui redit in fastos et annis miraturque.</p>
+        
+        <p id="padding">Ennius et sapines et fortis et alter Homerus, ut critici dicunt, leviter curare videtur, quo promissa cadant et somnia Pythagorea.
+        Naevius in manibus non est et mentibus haeret paene recens? Adeo sanctum est vetus omne poema. Ambigitur quotiens, sit prior, Pacuvius docti.</p>
+    </div>
+
+    <div>
+        <h1 id="border">Borda</h1>
+    </div>
+
+    <div id="picture">
+        <img src="http://files.cod3r.com.br/curso-web/imagem1.jpg" alt="Rio de Janeiro" width="513" height="342">
+    </div>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro ab, laborum minus error tempora aut eaque quibusdam similique, dolore facere atque?
+     Odit, odio optio numquam quaerat non molestiae perspiciatis consequatur!</p>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro ab, laborum minus error tempora aut eaque quibusdam similique, dolore facere atque?
+    Odit, odio optio numquam quaerat non molestiae perspiciatis consequatur! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro ab, laborum minus error tempora aut eaque quibusdam similique, dolore facere atque?
+    Odit, odio optio numquam quaerat non molestiae perspiciatis consequatur! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro ab, laborum minus error tempora aut eaque quibusdam similique, dolore facere atque?
+    Odit, odio optio numquam quaerat non molestiae perspiciatis consequatur!</p>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro ab, laborum minus error tempora aut eaque quibusdam similique, dolore facere atque?
+    Odit, odio optio numquam quaerat non molestiae perspiciatis consequatur! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro ab, laborum minus error tempora aut eaque quibusdam similique, dolore facere atque?
+    Odit, odio optio numquam quaerat non molestiae perspiciatis consequatur! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro ab, laborum minus error tempora aut eaque quibusdam similique, dolore facere atque?
+    Odit, odio optio numquam quaerat non molestiae perspiciatis consequatur!</p>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro ab, laborum minus error tempora aut eaque quibusdam similique, dolore facere atque?
+    Odit, odio optio numquam quaerat non molestiae perspiciatis consequatur! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro ab, laborum minus error tempora aut eaque quibusdam similique, dolore facere atque?
+    Odit, odio optio numquam quaerat non molestiae perspiciatis consequatur! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro ab, laborum minus error tempora aut eaque quibusdam similique, dolore facere atque?
+    Odit, odio optio numquam quaerat non molestiae perspiciatis consequatur!</p>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro ab, laborum minus error tempora aut eaque quibusdam similique, dolore facere atque?
+    Odit, odio optio numquam quaerat non molestiae perspiciatis consequatur! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro ab, laborum minus error tempora aut eaque quibusdam similique, dolore facere atque?
+    Odit, odio optio numquam quaerat non molestiae perspiciatis consequatur! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro ab, laborum minus error tempora aut eaque quibusdam similique, dolore facere atque?
+    Odit, odio optio numquam quaerat non molestiae perspiciatis consequatur!</p>
+    
+    <br><br>
+ 
+    <div id="column1">
+        <p>Haec disserens qua de re agatur et in quo causa consistat non videt... Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+         Fugit officia magnam facere? Quidem soluta possimus odio vitae nihil, deleniti sapiente corporis harum ea ullam asperiores 
+         tempora animi voluptatibus atque earum.Haec disserens qua de re agatur et in quo causa consistat non videt... Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+         Fugit officia magnam facere? Quidem soluta possimus odio vitae nihil, deleniti sapiente corporis harum ea ullam asperiores 
+         tempora animi voluptatibus atque earum.Haec disserens qua de re agatur et in quo causa consistat non videt... Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+         Fugit officia magnam facere? Quidem soluta possimus odio vitae nihil, deleniti sapiente corporis harum ea ullam asperiores 
+         tempora animi voluptatibus atque earum.</p>
+    </div>
+    <div id="column2">
+        <p>Haec disserens qua de re agatur et in quo causa consistat non videt... Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            Fugit officia magnam facere? Quidem soluta possimus odio vitae nihil, deleniti sapiente corporis harum ea ullam asperiores 
+            tempora animi voluptatibus atque earum.Haec disserens qua de re agatur et in quo causa consistat non videt... Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            Fugit officia magnam facere? Quidem soluta possimus odio vitae nihil, deleniti sapiente corporis harum ea ullam asperiores 
+            tempora animi voluptatibus atque earum.Haec disserens qua de re agatur et in quo causa consistat non videt... Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            Fugit officia magnam facere? Quidem soluta possimus odio vitae nihil, deleniti sapiente corporis harum ea ullam asperiores 
+            tempora animi voluptatibus atque earum.</p>
+    </div>
+    <div id="column3">
+        <p>Haec disserens qua de re agatur et in quo causa consistat non videt... Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            Fugit officia magnam facere? Quidem soluta possimus odio vitae nihil, deleniti sapiente corporis harum ea ullam asperiores 
+            tempora animi voluptatibus atque earum.Haec disserens qua de re agatur et in quo causa consistat non videt... Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            Fugit officia magnam facere? Quidem soluta possimus odio vitae nihil, deleniti sapiente corporis harum ea ullam asperiores 
+            tempora animi voluptatibus atque earum.Haec disserens qua de re agatur et in quo causa consistat non videt... Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            Fugit officia magnam facere? Quidem soluta possimus odio vitae nihil, deleniti sapiente corporis harum ea ullam asperiores 
+            tempora animi voluptatibus atque earum.</p>
+    </div>
+
+    <br><br>
+
+    <div id="picture2">
+        <img src="http://files.cod3r.com.br/curso-web/imagem2.jpg" alt="Rio de Janeiro" width="256" height="170">
+    </div>
+    <h1>Rio de Janeiro</h1>
+    <p class="floatstop">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia eius nisi natus illum cum optio pariatur
+         perferendis amet fuga, et quisquam aliquam nam accusantium omnis tempora, officiis quia laudantium obcaecati!</p>
+
+</body>
+
+</html>

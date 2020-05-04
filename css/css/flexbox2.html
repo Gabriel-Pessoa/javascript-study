@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Flexbox #02</title>
+    <link rel="stylesheet" href="css/tag.css">
+    <style>
+
+
+      .flex-container div {
+          /*As propriedades de largura (width) e de altura (height) incluem o tamanho padding size 
+          e a propriedade border, mas não incluem a propriedade margin*/
+            box-sizing: border-box;
+      }
+      .flex-container {
+            display: flex;   
+            height: 300px;
+            width: 600px;
+      }
+
+      .flex-container div:nth-child(3) { /*dentro da class flex-container, pegue o terceiro filho que é uma div*/
+          background-color: indianred;
+          /*propriedade que altera a ordem dentro de uma flex box*/
+          order: 1; /*todos os itens dentro da flex box tem por padrão a ordem 0,
+          colocando ordem 1, esse item passa a ter um peso maior. Elementos com ordem
+          maior são exibidos por último*/
+          order: 0; /*voltou ao padrão, e segue a ordem do html*/
+          order: -1; /*terá uma ordem menor que todos e será exibido primeiro*/
+          align-self: center; /*como o padrão é stretch*/
+          align-self: flex-end;
+          align-self: flex-start; 
+          align-self: stretch; /*default*/                
+      }
+
+      .flex-container div {
+            width: 100px;
+            flex-grow: 0;
+            /*pega a largura, divide pela quantidade de elemento e distribui no container, respeito o peso que cada elemento tem*/
+            flex-grow: 1;
+      }
+      .flex-container div:nth-child(1) {
+            flex-grow: 2;/*defini um peso para esse item maior que os outro, 
+            por isso ele irá crescer mais*/     
+      }
+
+      .flex-container {
+         width: 300px; /*dimuniu a flex box*/
+         flex-shrink: 1; /*todos os elementos encolhem de forma uniforme*/
+      }
+
+      .flex-container div:nth-child(1) {
+          flex-shrink: 5; /*peso maior para encolher*/
+      }
+
+
+    </style>
+</head>
+
+<body>
+    <div class="flex-container tag nolabel">
+        <div class="tag nolabel">1</div>
+        <div class="tag nolabel">2</div>
+        <div class="tag nolabel">3</div>
+        <div class="tag nolabel">4</div>
+    </div>
+    <script src="js/tag.js"></script>
+</body>
+
+</html>

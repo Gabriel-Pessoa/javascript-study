@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Herança</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <style>
+        
+        
+        /*Apliquei no body e por herança h1 e div herdaram a font e tamanho a fonte. A borda
+        por padrão não é transmitida por herança */
+        body {
+            font-family: 'Oswald', sans-serif;
+            font-size: 40px;
+            /* esses abaixos não são herdados */
+            border: solid 3px red;
+            padding: 50px;
+        }
+
+        /* para herdar usamos uma palavras reservada inherit*/
+        div {
+            border: inherit;  
+            padding: inherit;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <h1>Herança</h1>
+    <div>Estou herdando
+        <span><p>
+            Teste
+        </p></span>
+    </div>
+</body>
+
+</html>
