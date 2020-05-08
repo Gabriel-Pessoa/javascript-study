@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Trabalhando com Eventos #01</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+</head>
+
+<body class="conteudo exercicio">
+    <div>
+        <!--onclick="navegarEm5s(event)"--> <!--1º opção-->
+
+        <a wait-for-5s href="https://google.com.br" >Google</a>
+    </div>
+    <script>
+
+       function navegarEm5s(e) {
+        /* preventDefault: previne padrão. Cancela o evento se for cancelável, 
+        sem parar a propagação do mesmo. */
+            e.preventDefault() // pego o comportamento do evento (no caso onclick)
+            console.log('Saindo em 5s...')   
+            setTimeout( () => {
+               // document é uma propriedade apenas de leitura, não conseguiria alterar o href
+               //location contém informações da url e prover mpetodos para mudá-la e carregar outra
+               // href: retorna um USVString contendo a URL inteira e permite que o href seja atualizado.
+               // target: Uma referência ao objeto que enviou o evento
+                window.location.href = e.target.href
+            }, 5000)
+        }
+
+        // 2º opção
+        // const a = document.querySelector('a')
+        // a.onclick = navegarEm5s // onclick dispara o evento, invoca a função passando esse evento
+
+        // 3ºopção bastante indicado
+        const a = document.querySelector('[wait-for-5s]')
+        a.onclick = navegarEm5s
+
+        
+
+
+
+    </script>
+</body>

@@ -1,4 +1,17 @@
+1) add commit
+
 git status
 git add .
 git commit -m ""
-git push    
+git push 
+
+2)delete folder
+
+git checkout master
+git rm -r folder-name
+git commit -m "Remove duplicated directory"
+git push origin master
+
+3)Reset add
+
+git reset

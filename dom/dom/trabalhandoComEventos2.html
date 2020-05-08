@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Trabalhando com Eventos #02</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+</head>
+
+<body class="conteudo exercicio">
+    <div>Elemento</div>
+   
+   <script>
+
+    const item = document.querySelector('div')
+    item.style.position = 'absolute' //posicionado em relação ao seu primeiro elemento ancestral posicionado
+    
+    item.onmousemove = e => {
+        e.target.style.cursor = 'move' // curso do mouse altera para move ao tocar no elemento
+        if(e.buttons) { // ou seja (e.buttons != 0) == true
+            item.style.top = `${e.clientY - (item.clientHeight / 2)}px`
+            item.style.left = `${e.clientX - (item.clientWidth / 2)}px`
+        }
+    }    
+
+    </script>
+</body>

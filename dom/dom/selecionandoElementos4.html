@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Selecionar Elementos #04</title>
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+
+<body class="conteudo exercicio">
+    <div>
+        <p>Início</p>
+    </div>
+    <div>
+        <ul>
+            <li>Pedro</li>
+            <li>Ana</li>
+            <li>Bia</li>
+        </ul>
+    </div>
+    <div>
+        <p>Fim</p>
+    </div>
+    <script>
+
+        /* Uma função para facilitar o console.log.
+        Em uma arrow function o this apontaria para o objeto window todas as vezes*/
+        function log() {
+            console.log(this)
+        }
+        
+        HTMLCollection.prototype.log = log
+        HTMLElement.prototype.log = log
+        NodeList.prototype.log = log
+        Node.prototype.log = log
+
+        const lista = document.querySelector('div ul') // seleciona uma ul dentro de uma div
+        lista.parentNode.log() // parentNode vai pegar o pai do elemento
+        lista.childNodes.log() // vai retornar o(s) filhos daquele elemento. obs: irá retornar tbm os espaços (para evitar é só eliminar os espaços)
+
+
+        const primeiro = lista.firstChild
+        primeiro.log() // seleciona um texto, que é o espaço entre a lista e a primeira li
+        primeiro.nextSibling.log() // mostra o li logo depois do espaço (texto)
+
+
+        const ultimo = lista.lastChild //pega o último filho
+        ultimo.log() // é um texto (espaçamento)
+        ultimo.previousSibling.log() // pega o elemento anterior
+
+        lista.children.log() // não vem os textos (espaçamentos)
+        lista.firstElementChild.log() // primeiro elemento filho
+        lista.lastElementChild.log() // último elemento filho
+
+        //misturando
+        lista.parentNode.previousElementSibling.log() // div pai, o elemento anterior é outra div
+        lista.parentNode.nextElementSibling.log()
+
+        // de forma mais objetiva e precisa, evitando os espaçamentos
+        document.querySelectorAll('div ul li').log()
+
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Trabalhando com Eventos #04</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+    <style>
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        form input,
+        form select,
+        form button {
+            margin: 10px;
+            font-size: 1.6em;
+        }
+    </style>
+</head>
+
+<body class="conteudo exercicio">
+    <h1>Formulário</h1>
+    <form name="pesquisa" action="http://www.google.com.br/search">
+        <input type="text" name="q" placeholder="Digite o termo...">
+        <select name="hl">
+                <option value="pt-br">Português (Brasil)</option>
+                <option value="en-us">Inglês (Americano)</option>
+            </select>
+        <button wm-submit>Pesquisar</button>
+    </form>
+    <script>
+    // 1 opção
+//         const submit = document.querySelector('[wm-submit]')
+//         submit.onclick = function(e) {
+//             e.preventDefault()
+//             // target: Uma referência ao objeto que enviou o evento. O evento está sendo avaliado no momento
+//             // parentNode:  é o node parente do node referenciado(Element node, um Document node, ou um DocumentFragment node).
+//             const form = e.target.parentNode // e.target = button. parentNode é o parente mais próximo (form)
+//             const formData = new FormData(form) 
+//             formData.append('ajax', true) // add informação ajax no formData
+//             console.log(formData.get('q')) // pegando parâmetro de pesquisa que vai na url 
+//             console.log(formData.has('hl')) // retorna true se parâmetro existir
+            
+//             for(let dado of formData) {
+//                 console.log(dado)
+//             }
+//    }
+
+// segunda opção
+   const form = document.forms[0]
+        form.onsubmit = function(e) {
+            e.preventDefault()
+            // target: Uma referência ao objeto que enviou o evento. O evento está sendo avaliado no momento
+            // parentNode:  é o node parente do node referenciado(Element node, um Document node, ou um DocumentFragment node).
+            const form = e.target// e.target = form.
+            const formData = new FormData(form) 
+            formData.append('ajax', true) // add informação ajax no formData
+            console.log(formData.get('q')) // pegando parâmetro de pesquisa que vai na url 
+            console.log(formData.has('hl')) // retorna true se parâmetro existir
+            
+            for(let dado of formData) {
+                console.log(dado)
+            }
+   }
+
+    </script>
+</body>

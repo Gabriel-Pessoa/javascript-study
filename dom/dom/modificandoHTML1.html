@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Modificando HTML #01</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+</head>
+
+<body class='conteudo exercicio'>
+
+    <script>
+        
+        const body = document.querySelector('body') // vou precisar do body para inserir tags
+
+        const div1 = document.createElement('div') // criei uma div
+        div1.classList.add('destaque') // add uma class a div acima
+        div1.innerHTML = 'Primeiro' // inseri conteúdo na div
+
+
+        const div2 = document.createElement('div') // criei outra div
+        div2.setAttribute('wm-atributo', 'valor') // acabei de criar um atributo personalizado com valor = valor (wm-atributo="valor")
+        div2.innerHTML = 'Segundo' // conteúdo da div
+
+        const p = document.createElement('p')
+        p.innerHTML = 'Terceiro'
+        const div3 = document.createElement('div')
+        div3.appendChild(p) // p é o nó a ser add ao elemento div3 por último
+
+        
+        body.appendChild(div1)
+        body.appendChild(div2)
+        body.appendChild(div3) // div3 vem junto com seus filho, no caso p
+
+        const texto = document.createTextNode('Antes')
+        div3.insertBefore(texto, div3.childNodes[0]) // insertBefore insere o elemento antes do elemento que especificamos
+
+        const div4 = div3.cloneNode(true) // atribui a div4 uma cópia da div3, e passando true como atributo ao método cloneNodes ele cópia também os seus filhos
+        body.appendChild(div4)
+        body.removeChild(div3) // removeu o elemento especificado
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Selecionar Elementos #03</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <style>
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        form input,
+        form select,
+        form button {
+            margin: 10px;
+            font-size: 1.6em;
+        }
+    </style>
+</head>
+
+<body class="conteudo exercicio">
+    <h1>Formulário</h1>
+    <form name="pesquisa" action="http://www.google.com.br/search">
+        <input type="text" name="q" placeholder="Digite o termo...">
+        <select name="hl">
+            <option value="pt-br">Português (Brasil)</option>
+            <option value="en-us">Inglês (Americano)</option>
+        </select>
+        <button>Pesquisar</button>
+    </form>
+    <script>
+        //selecionando form
+        console.log(document.forms)
+        console.log(document.forms[0])
+        console.log(document.getElementsByName('pesquisa')) // retorna NodeList
+        console.log(document.getElementsByTagName('form')) // retorna HTML collection
+        console.log(document.pesquisa) // simples, fácil e direto. Procura a class diretamente
+        console.log(document.pesquisa.q) // entrou no form class= .pesquisa e pegou o input name = p
+        
+        // q e hl não são parâmetros aleatórios, são parâmetro que vão na url de pesquisa do google.
+        document.pesquisa.q.value = 'Linux' //add o valor Linux ao input 
+        document.pesquisa.hl.value = 'en-us' // também posso modificar o valor da option
+
+        console.log(document.pesquisa.hl.selectedIndex) // retorna o índice selecionado na ordem, em que 0 é nenhum selecionado
+
+    </script>
+</body>
+
+</html>

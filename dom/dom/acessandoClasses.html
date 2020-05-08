@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Acessando Classes</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+</head>
+
+<body class='conteudo exercicio'>
+    <div>
+        Classes
+    </div>
+    <script>
+
+        /* classList é uma propriedade somente leitura, que pode alterar a partir da propriedade add() e remove(). Podemos a partir dele acessar atributos como toogle,
+          e etc*/
+
+        // const div = document.querySelector('div')
+        //const classe = div.classList (outra abordagem)
+        const classe = document.querySelector('div').classList // poderia substituir pelo acima
+        classe.add('destaque')
+        classe.remove('destaque')
+        classe.toggle('destaque') // alternância, é com se fosse um interruptor on/off
+        console.log(classe.contains('destaque')) // retorna verdadeiro se contém a classe
+        console.log(classe.length) // só existe uma classe (.destaque)
+        classe.toggle('destaque') // off
+        console.log(classe.length) // toggle acabou de remover
+        
+        classe.add('destaque1')
+        classe.add('destaque2')
+        console.log(classe.length)
+
+        /* classList retorna um DomList que pode ser interável for, forEach. Podendo ser facilmente transformado em um array.
+           Array.from(classe) ou [...classe] spread*/
+        for(let c of classe) {
+            console.log(c) // retorna as classes
+        }
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Selecionar Elementos #02</title>
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+
+<body class="conteudo exercicio">
+    <div id="primeiro">#primeiro</div>
+    <div>Segundo</div>
+    <div class="terceiro ultimo"><span wb-attrib>.terceiro .ultimo</span></div>
+    <script>
+        /* query selector espera um seletor css(#id , .class). Ele é muito flexível, você pode 
+         selecionar class, id, atributo, tag*/
+
+        document.querySelector('#primeiro').classList.add('destaque')
+
+        /*criando um função para automatizar*/
+        function selecionar(elem) {
+            /*querySelectorAll gera um nodeList (não é um array), porém funciona exclusivamente o forEach para percorrer 
+            cada elemento */
+            document.querySelectorAll(elem)
+                .forEach(elem => elem.classList.add('destaque'))
+        }
+
+        /*outra opção de função: atribuir um arrow function a uma variável*/
+        const deselecionar = elem => document.querySelectorAll(elem)
+            .forEach(elem => elem.classList.remove('destaque'))
+
+        selecionar('.ultimo')
+
+        deselecionar('.terceiro')
+
+        selecionar('div')
+
+        deselecionar('*')
+
+        selecionar('.ultimo.terceiro') // a ordem não importa
+
+        deselecionar('*')
+
+        //usando pseudo-classes.
+        selecionar(':not(#primeiro)') // seleciona todos, exceção do id:#primeiro
+
+        deselecionar('*')
+
+        // selecionar o primeiro filho de algum elemento
+        selecionar(':nth-child(1)')
+
+        deselecionar('*')
+
+        // selecionar o primeiro elem do tipo div
+        selecionar('div:nth-of-type(1)')
+        selecionar('span:nth-of-type(1)')
+
+        deselecionar('*')
+
+        selecionar('[wb-attrib]') //selecionei atributo personalizado
+
+    </script>
+</body>
+
+</html>
