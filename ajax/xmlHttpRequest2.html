@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>XMLHttpRequest #02</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+    <style>
+        input[type=file] {
+            display: flex;
+            margin: 10px;
+            padding: 40px;
+            font-size: 40px;
+            background: crimson;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body class="conteudo exercicio">
+    <input type="file" name="arquivo" />
+    <div class="progresso"></div>
+
+    <script>
+
+
+     function ajaxUpload(config) {
+            const xhr = new XMLHttpRequest()
+
+            if (xhr.upload) { // está setado
+                // forma para monitorar o progresso
+                xhr.upload.onprogress = e => {
+                    const atual = e.loaded
+                    const total = e.total
+                    const percentual = Math.floor(atual / total * 100)
+                    config.progresso({ atual, total, percentual })
+                }
+            }
+
+            xhr.open('POST', config.url, true)
+            xhr.send(config.formData) // envia formData dentro dele tem o arquivo que foi selecionado
+        }
+
+        // evento onchange ocorre quando o valor do input foi alterado
+        document.querySelector('input[type=file]').onchange = e => {
+            const formData = new FormData()
+            const inputFile = e.target // é o próprio input
+            formData.append(inputFile.name, inputFile.files[0])
+
+            // invoca função passando objeto literal que é o parâmetro config dessa função
+            ajaxUpload({
+                url: 'upload',
+                formData, // formData: formData
+                progresso(dados) {
+                    const progresso = document.querySelector('.progresso') // capturando div com class .progreso
+                    progresso.innerHTML = JSON.stringify(dados) // renderizando os dados recebido da função ajax
+                }
+            })
+        }
+
+
+    </script>
+</body>

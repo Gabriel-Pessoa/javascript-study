@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>XMLHttpRequest #03</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+</head>
+
+<body class="conteudo exercicio">
+    <h1>Estados</h1>
+
+    <script>
+
+        // função ajax
+        function ajax(config) {
+            const xhr = new XMLHttpRequest()
+            xhr.open(config.metodo, config.url, true)
+
+            // onreadystate = evento é chamado sempre que o status da requisição mudar
+            xhr.onreadystatechange = e => {
+                if (xhr.readyState === 4) { // status requisição finalizada e resposta pronta
+                    if (xhr.status === 200) { // status de sucesso http
+                        config.sucesso(xhr.responseXML) // ao passar response XML para a função sucesso ele já devolve um objeto resolvido, uma espécie de mini-Dom
+                    } else if (xhr.status >= 400) { // status erro no cliente ou servidor
+                        config.erro({
+                            codigo: xhr.status,
+                            texto: xhr.statusText
+                        })
+                    }
+                }
+            }
+            //enviar
+            xhr.send()
+        }
+
+        ajax({
+            url: 'dados/estados.xml',
+            metodo: 'GET',
+            sucesso(resposta) {
+
+                console.log(resposta) // observar o #document produzido pelo responseXML 
+
+                const estados = resposta.getElementsByTagName('estado') // capturar todos as tags estados de dentro da mini-dom
+                const itens = Array.from(estados).reduce(
+                    // html: textos gerados (acumulador) concatenados com estado: valor do atributo nome. Começando com uma string vazia para que dê certo toda a concatenação   
+                    (html, estado) => html + `<li>${estado.attributes.nome.value}</li>`, ''
+
+                )
+                document.body.insertAdjacentHTML('beforeend', `<ul>${itens}</ul>`) // inserindo na body para aparecer na tela
+            },
+            erro(e) {
+                const msg = document.createTextNode(`${e.codigo}: ${e.texto}`)
+                document.body.appendChild(msg)
+            }
+        })
+
+
+    </script>
+</body>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Axios #02</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+    <script src="js/axios.js"></script>
+</head>
+
+<body class="conteudo exercicio">
+    <h1>Axios Get/Post</h1>
+    <div id="get"></div>
+    <div id="post"></div>
+
+    <script>
+
+        // atráves do id capturamos o elemento, dados para ser renderizado no elemento com id específico 
+        function exibirResultado(id, dados) {
+            const texto = JSON.stringify(dados)
+            document.getElementById(id).innerHTML = texto
+        }
+
+        // axios('parOuImpar?numero=7').then(resp => exibirResultado('get', resp.data)) // outra abordagem
+        axios.get('parOuImpar', {
+            //
+            params: {
+                numero: 9
+            }
+        }).then(resp => exibirResultado('get', resp.data))
+
+        // aproveita a middleware criada para o formulário feito antes. Tendo reuso mesmo não tendo formulário
+        axios.post('formulario', {
+            nome: 'Gabriel',
+            sobrenome: 'Júlio'
+        }).then(resp => exibirResultado('post', resp.data))
+
+
+    </script>
+</body>

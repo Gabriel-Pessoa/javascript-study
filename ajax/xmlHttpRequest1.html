@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>XMLHttpRequest #01</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+</head>
+
+<body class="conteudo exercicio">
+    <h1>Estados</h1>
+
+    <script>
+
+// implementando da forma mais antiga, sem uso de fetch, jquery ou axios        
+
+// função para reuso dentro do projeto, que simula o ajax, que recebe um objeto com parâmetros
+function ajax(config) {
+            const xhr = new XMLHttpRequest() // instanciando XMLHttpRequest
+            xhr.open(config.metodo, config.url, true) // 1.param: método, 2.param: url, 3.param: true assíncrono
+            // tratando evento onload, recebe evento, porém não será utilizado
+            xhr.onload = e => {
+                if (xhr.status === 200) { // se status http === 200. Sucesso
+                    config.sucesso(xhr.response) // passo como parâmetro para o método sucesso a resposta do xhr
+                } else if (xhr.status >= 400) { // se status http >= 400, erro do cliente ou servidor
+                    config.erro({ // chama objeto config que será definido abaixo, passando como parâmetro um objeto com pares chave/valor para ser acessador no objeto config
+                        codigo: xhr.status, // código do erro
+                        texto: xhr.statusText // texto status do erro
+                    })
+                }
+            }
+            // função que de fato vai enviar a requisição
+            xhr.send()
+        }
+
+        // criando tabela para aparecer na dom
+        function criarTabela(estados) {
+            // linhas é um array que receberá linhas da tabela com células específica por id, nome ou estado
+            const linhas = estados.map(estado => {
+                const tdId = document.createElement('td')
+                tdId.innerHTML = estado.id
+
+                const tdNome = document.createElement('td')
+                tdNome.innerHTML = estado.nome
+
+                const tdSigla = document.createElement('td')
+                tdSigla.innerHTML = estado.sigla
+
+                const tr = document.createElement('tr')
+                
+                // add linhas com suas células definidas às colunas
+                tr.appendChild(tdId)
+                tr.appendChild(tdNome)
+                tr.appendChild(tdSigla)
+
+                return tr // retorna linhas prontas com células definidas
+            })
+
+            const tabela = document.createElement('table') // criar elemento table para definir tabela
+            linhas.forEach(linha => tabela.appendChild(linha)) // percorre o array de linhas já prontas, add a tabela
+            document.body.appendChild(tabela) // add a tabela no body para aparecer na tela
+        }
+
+        //invoquei a função ajax criada acima, passando um objeto anônimo que chamei de config no parâmetro
+        ajax({
+            url: 'dados/estados.json',
+            metodo: 'GET',
+            sucesso(resposta) {
+                const estados = JSON.parse(resposta) // tratando resposta passada pela função ajax baseado no xhr
+                criarTabela(estados)
+            },
+            erro(e) { // método erro que recebe como parâmetro objeto literal anônimo definido na função ajax
+                const msg = document.createTextNode(`${e.codigo}: ${e.texto}`)
+                document.body.appendChild(msg) // add msg de erro a tela do usuário
+            }
+        })
+    </script>
+</body>
