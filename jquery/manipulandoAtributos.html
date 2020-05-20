@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Manipulando Atributos</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+    <script src='js/jquery.js'></script>
+    <style>
+        [wm-relogio] {
+            text-align: center;
+        }
+
+        [wm-relogio] button {
+            font-size: 1.6em;
+            padding: 0px 25px;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body class='conteudo exercicio'>
+    <h1>Manipulando Atributos</h1>
+    <div wm-relogio='1000'></div>
+    <div wm-relogio='3000'></div> <!--com a função construtora podemos definir mais de um relógio-->
+    <script>
+
+        //função construtora
+        function Relogio(elemento) {
+            const horaCerta = $('<p>').html('0') // criei um parágrafo para 
+            const botaoMenos = $('<button>').html('-')
+            const botaoMais = $('<button>').html('+')
+
+            const $elemento = $(elemento) // o elemento recebido como parâmetro é transformado em elemento jQuery e guardado nessa variável   
+
+            $elemento.append(horaCerta, botaoMenos, botaoMais)
+
+            const getIntervaloAtual =
+                () => parseInt($elemento.attr('wm-relogio')) // pego atributo da div com seletor personalizado, passando tambḿ o atributo personalizado
+
+            let temporizador = null // resultado da função setInterval, sempre que alterar o tempo de atualização, preciso parar o temporizador antigo e iniciar um novo 
+
+            const iniciar = () => {
+                // se temporizador tiver setado, faça um clear no temporizador
+                if (temporizador) clearInterval(temporizador)
+                temporizador = setInterval(() => {
+                    horaCerta.html(new Date().toLocaleString('pt-BR')) //renderiza a função construtora convertendo para um string local características do Brasil 
+                }, getIntervaloAtual()) // função que altera o intervalo
+            }
+
+            const alterarIntervalo = delta => {
+                const novo = Math.max(getIntervaloAtual() + delta, 1000) // getIntervaloAtual() + delta >= 1000 ? getIntervaloAtual() + delta : 1000 (setando valores de 1000 para cima)
+                $elemento.attr('wm-relogio', novo) // atribui a variável novo ao atributo personalizado wm-relogio
+                iniciar() // reinicio novamente o temporizador limpando o novo
+            }
+
+            botaoMenos.click(e => alterarIntervalo(1000)) // toda vez que clicar no botão acrescentar 1000 aumentando a frequencia do relógio
+            botaoMais.click(e => alterarIntervalo(-1000)) // toda vez que clicar no botão subtrai 1000 diminuindo a frequencia do relógio
+            
+            iniciar() // para iniciar a primeira vez
+        }
+
+        $('[wm-relogio]').each((i, e) => new Relogio(e)) // seleciona todos os elementos com atributo personalizado, percorre esses elemento passando a função construtora
+                                                        // criando novas instância com alterações da função construtora
+        
+        //$('[wm-relogio]').attr('opa') // ler atributo
+        //$('[wm-relogio]').attr('opa', 3) // alterar ou incluir
+        $('[wm-relogio]').attr({ opa:1, novo: true }) // add novos atributos a todas as instâncias
+        $('[wm-relogio]').removeAttr('opa').removeAttr('novo')
+        
+        
+  </script>
+</body>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Entendendo jQuery</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+    <script src="js/jquery.js"></script>
+</head>
+
+<body class="conteudo exercicio">
+    <h1>Entendendo jQuery</h1>
+    <div>1</div>
+    <div>2</div>
+
+    <script>
+
+        // posso referenciar o assim: jquery ou $.
+        // posso encadear várias chamada para fazer uma animação por exemplo 
+        $('div').hide(5000).show(5000).fadeOut(5000)
+        console.log($('div').get(0)) // o jquery não é o nó da dom exatamente. Dentro dele existe o nó que pode ser facilmente manipulado  
+        console.log($.isEmptyObject({ nome:null })) // exemplo de função utilitária que retorna true se objeto vazio
+        console.log(jQuery.inArray(3, [1,2,3])) // $ ou jQuery. inArray( retorna posição que elemento está dentro do array, se não existir retorna -1)
+
+        //criando plugins, extendendo o jQuery
+        $.fn.fundoVerde = function() {
+            // parecido como criar funcionalidade com prototype
+            // altera -- propriedade css background-color = green
+            this.css('background-color','green')
+            return this // retorna o próprio o objeto que já foi alterado com o código acima, facilitando o encadeamento de chamadas
+        }
+        //selecionei o body, aplica a função personalizada(que return this para encadear chamadas) e chamo mais uma função
+        $('body').fundoVerde().fadeOut(1000)
+
+
+   </script>
+</body>

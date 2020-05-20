@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Eventos #01</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+    <script src='js/jquery.js'></script>
+    <style>
+        input {
+            font-size: 2em;
+        }
+    </style>
+</head>
+
+<body class='conteudo exercicio'>
+    <h1>Eventos #01</h1>
+    <div id='posicao'></div>
+    <div id='cliques'>Cliques: 0</div>
+    <input type="text" placeholder="Cor de Background">
+
+    <script>
+
+
+        function mostrarPosicaoMouse(e) {
+            $('#posicao').html(`x: ${e.clientX} y: ${e.clientY}`)
+        }
+        // associar ao body o evento do mouse; on registra um evento no jQuery, recebe como parâmetro o evento que queremos trabalhar
+        $('body').on('mousemove', mostrarPosicaoMouse) // obs: não invocar função!
+
+        // ao passar no elemento selecionado, é apagado o registro do evento do mouse
+        $('#posicao').mouseover(e => {
+            $('body').off('mousemove', mostrarPosicaoMouse)
+        })
+
+        // ao sair do elemento selecionado acima, voltar a mostrar posição do mouse 
+        $('#posicao').mouseleave(e => {
+            $('body').mousemove(mostrarPosicaoMouse) // faz a mesma coisa do código abaixo
+            // $('body').on('mousemove', mostrarPosicaoMouse)
+        })
+
+        // capturar cliques do mouse
+        let cliques = 0
+
+        $('body').click(e => { // toda vez que houver click dentro do body, disparo um evento 
+            $('#cliques').html(`Cliques: ${++cliques}`) // como o operador unário vem antes, primeiro ele incrementa, depois interpola
+        })
+
+        // manipular eventos de teclado
+        const backgroundOriginal = $('body').css('background-color') // caso coloque valor inválido, permanece no original
+
+        $('input').keyup(function (e) { // captura teclas do teclado  
+            const valor = $(this).val() // pegando valor atual. Com function arrow dá problema
+            if(valor.match(/#[\da-fA-F]{3,6}/)) { // expressão regular para identificar se valor de entrada é válido
+                $('body').css('background-color', valor)
+            } 
+            else {
+                $('body').css('background-color', backgroundOriginal)
+            }
+        })
+
+    </script>
+</body>

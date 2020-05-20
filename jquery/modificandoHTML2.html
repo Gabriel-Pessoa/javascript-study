@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Modificando HTML #02</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+    <script src='js/jquery.js'></script>
+</head>
+
+<body class='conteudo exercicio'>
+    <h1>Modificando HTML #02</h1>
+    <div id='div1'>1</div>
+    <div id='div2'>2</div>
+    <div id='div3'>3</div>
+    <p class='numero'>4</p>
+    <p class='numero'>5</p>
+
+    <script>
+        
+        $('#div1').append(', 2') // add o 2 do lado direito do 1
+        $('#div1').prepend('0, ') // add 0 do lado esquerdo do 1
+        
+        $('<span>, 3</span>').appendTo('#div1') // add o elemento criado a todos os elementos selecionados
+        $('<span>-1, </span>').prependTo('#div1') // add elemento criado antes do selecionado
+        
+        $('#div2').before('<p>Antes 2</p>') //antes do elemento selecionado add determinado nó
+        $('#div2').after('<p>Depois 2</p>')
+
+        $('<p>Antes 3</p>').insertBefore('#div3') // Criei um nó e insere antes do elemento com determinado id
+        $('<p>Depois 3</p>').insertAfter('#div3') // Depois da #div3 inserir parágrafo
+
+       // $('p.numero').wrap('<div>') // envolve com uma div o parágrafo com classe específica
+        $('p.numero').wrapAll('<div id="div4">') // selecionei todos elementos com classe específica e envolvi todos com uma div com id específico
+
+        $('#div4').empty() // limpar conteúdo. O elemento continua existindo, porém vazio
+
+        $('#div3, #div4').prev().remove() // selecionei duas div com id específicos, peguei os elementos anteriores e removi (apagado)
+        
+        //$('<div>Substituto</div>').replaceAll('body > p') // criei um elemento e estou substituindo em todos os parágrafos que estão diretamente dentro do body
+
+        //$('body > p').replaceWith('<div>Substituto</div>') // faz o msmo que o código acima, porém tem um sintaxe mais coerente
+
+        $('body > p').replaceWith(function() {
+            return $('<div>').html($(this).html()).append('!!!') // do elemento atual que foi selecionado, retorno uma div com o html do elemento atual dentro dela
+        })
+
+    </script>
+</body>

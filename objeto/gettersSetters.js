@@ -2,7 +2,7 @@ const sequencia = {
     _valor:1, // o underline na frente não quer dizer que a variável é privada. É somente uma conversão para outros desenvolvedores que você vai acessar internamente
     get valor() { return this._valor++},
     set valor(valor) {
-        if(valor > this._valor) {
+        if(valor > this._valor) { // validação
         return this._valor = valor
         } 
     }
