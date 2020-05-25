@@ -1,6 +1,2 @@
-**node_modules
-ajax/.DS_Store
-gulp/typeScript/.DS_Store
-gulp/spa/.DS_Store
-jquery/fonts/.DS_Store
-jquery/js/.DS_Store
+node_modules
+.DS_Store

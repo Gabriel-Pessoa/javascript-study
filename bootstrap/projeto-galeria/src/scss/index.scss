@@ -1,0 +1,6 @@
+@import "~bootstrap/scss/bootstrap"; //vai procurar dentro de node_modules, sendo mais específico e diminuindo o tamanho do arquivo final da aplicação. 
+
+$fa-font-path: "~font-awesome/fonts"; // sobscrevendo variável do scss para encontrar diretório das fontes
+@import "~font-awesome/scss/font-awesome"; // reescrevendo a variável acima e importando
+
+@import "custom"; // a partir de todos os imports gerar o css do bootstrap, awesome e custom

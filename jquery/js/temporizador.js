@@ -1,6 +1,6 @@
 (function ($) {
     $.fn.temporizador = function (opcoes) {
-        const opcoesFinais = $.extend({ // usei extend para definir propriedades padrões, caso o usuário
+        const opcoesFinais = $.extend({ // usei extend para definir propriedades padrões, caso o usuário na tenha preenchido
             mensagem: 'Em breve!',
             horario: '23:59:59'
         }, opcoes)  
