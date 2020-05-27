@@ -1,0 +1,41 @@
+/* declarando variáveis na pseudo classe root. Que é interpretado pelo borwser*/ 
+:root {
+    /*usando variáveis em css*/
+    --bg-button: #f0f0f0;
+    --border-button: solid 1px #888; 
+}
+
+.button {
+    font-size: 1.4em;
+    background-color: var(--bg-button); /*referenciando variável no css */
+    border: none;
+    border-right: var(--border-button);
+    border-bottom: var(--border-button);
+    outline: none;
+}
+
+/*escurece ao clicar*/
+.button:active {
+    background-color: #ccc;
+}
+
+/*button com class double ocupa duas colunas*/
+.button.double {
+    grid-column: span 2;
+}
+
+/*button com class triple ocupa três colunas*/
+.button.triple {
+    grid-column: span 3;
+}
+
+/*buttom class operation*/
+.button.operation {
+    background-color: #fa8231;
+    color: #fff;
+}
+
+/*buttom class operation ao clicar*/
+.button.operation:active {
+    background-color: #fa8231cc;
+}

@@ -1,0 +1,11 @@
+.display {
+    grid-column: span 4; /* quantas linhas da grid vai ocupar, no caso 4*/
+    background-color: #0004;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px;
+    font-size: 2.1em;
+    overflow: hidden; /*mais uma garantia de que os números não ultrapassaram o display*/
+}
