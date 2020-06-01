@@ -14,7 +14,7 @@ const initialState = {
 
 export default class Calculator extends Component {
     
-    state = {...initialState} // clone do objeto initialState e atribui 
+    state = {...initialState} // clone do objeto initialState 
 
     constructor(props) {
         super(props)
@@ -36,7 +36,6 @@ export default class Calculator extends Component {
         else {
             const equals = operation === '=' 
             
-
             const currentOperation = this.state.operation // pegando operação anterior
 
             const values = [...this.state.values]
@@ -83,7 +82,7 @@ export default class Calculator extends Component {
         
         const displayValue = currentValue + n // atribuição aditiva para cada valor de entrada salvando na variável displayValue
         
-        this.setState({ displayValue, clearDisplay:false })
+        this.setState({ displayValue, clearDisplay:false }) // valor padrão que pode ser alterado pelo operador ternário acima
 
         if ( n !== '.') {
             const i = this.state.current // referencia índice para alteração do array values
