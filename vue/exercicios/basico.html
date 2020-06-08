@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Conceitos Básicos</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+    <script src="/js/vue.min.js"></script>
+</head>
+
+<body class="exercicio">
+    <div id="app">
+        <!-- É uma template do vue, irá monitorar tudo na tag e abaixo dela -->
+        <p>1) {{ 2 + 2 }}</p><!-- Teste de funcionamento do Vuejs -->
+
+        <p>2) {{ "teste".toUpperCase() }}</p>
+
+        <p>3) Produto: {{ nome }}, R$ {{ preco }}, {{ desconto * 100}}%</p>
+
+        <p>4) Hora Certa: {{ horaCerta() }}</p>
+
+        <p>5) Preço com desconto cálculado: R$ {{ precoComDesconto }}</p>
+
+    </div>
+    <script>
+
+        // vue instance
+        new Vue({
+            el: "#app", // seleciona elemento de controle
+            data: { // dados disponíveis dentro da aplicação usando vue
+                nome: 'Caneta',
+                preco: 6.89,
+                desconto: 0.15
+            },
+            methods: {
+                horaCerta() {
+                    return new Date().toLocaleString()
+                }
+            },
+            computed: { //valores computados/calculados
+                precoComDesconto() {
+                    return this.preco * (1 - this.desconto)
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

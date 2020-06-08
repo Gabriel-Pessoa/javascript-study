@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Eventos</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+    <script src="/js/vue.min.js"></script>
+</head>
+<body class="exercicio">
+   
+    <div id="app">
+        <p>{{ contador }}</p> <!--monitora e atualiza os valores-->
+        <p>
+            <button v-on:click="add">+1</button> <!--Conceito de diretiva para evento onClick-->
+            <button @click="contador -= 2">-2</button> <!--A expressão @click é a mesma coisa que v-on:click. Em todas as duas podemos passar scripts pequenos de 1 linha-->
+        </p>
+        <p @mousemove="atualizarPosicao">
+            Coordenadas: {{x}} e {{y}}
+            <span @mousemove.stop>Aqui Não!!!</span> <!--Poderia criar um método stop(e){ e.stopPropagation() } -->
+        </p>
+        <input type="text" @keyup.enter="alerta"><!--Invoca função alerta ao aperta enter-->
+    </div>
+
+    <script>
+
+        new Vue({
+            el: "#app",
+            data: {
+                x: 0,
+                y: 0,
+                contador: 0
+            },
+            methods: {
+                add() {
+                    this.contador++
+                },
+                atualizarPosicao(e) {
+                    this.x = e.clientX
+                    this.y = e.clientY
+                },
+                alerta() {
+                    alert('Enter!')
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>

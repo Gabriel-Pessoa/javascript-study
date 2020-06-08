@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Componente</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+    <script src="/js/vue.min.js"></script>
+</head>
+
+<body class="exercicio">
+
+    <div id="app">
+
+        <increment></increment>
+        <increment></increment>
+        <increment></increment>
+
+    </div>
+
+    <script>
+
+        // criando componente
+        Vue.component('increment', {
+            data: function () { /*precisa retornar ter uma fuction que retorna uma propriedade,
+                                     senão todos os componentes vão compartilhar da mesma propriedade.*/
+                return {
+                    contador: 0
+                }
+            },
+            template: `
+            <div>
+                <span>{{ contador }}</span>
+                 <button @click="add">+1</button>
+                 <button @click="contador--">-1</button>
+             </div>
+        `,
+            methods: {
+                add() {
+                    this.contador++
+                }
+            }
+        })
+
+        new Vue({
+            el: "#app"
+        })
+    </script>
+</body>
+
+</html>
