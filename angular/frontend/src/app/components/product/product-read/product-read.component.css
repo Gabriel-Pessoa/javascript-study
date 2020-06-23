@@ -1,0 +1,27 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: none;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    padding: 20px 0px;
+}
+
+ tr:nth-child(1) {
+    background-color:#ddd;
+} 
+
+.edit {
+    margin-right: 15px;
+}
+
+.edit > i {
+    color: #d9cd26;
+}
+
+.delete > i {
+    color: #e35e6b;
+}

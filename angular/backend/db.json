@@ -1,0 +1,19 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Notebook Dell Game 15",
+      "price": 9882.89
+    },
+    {
+      "id": 2,
+      "name": "Celular Samsung Galaxy S3",
+      "price": 689.99
+    },
+    {
+      "id": 3,
+      "name": "Iphone XPlus Golden",
+      "price": 4550.89
+    }
+  ]
+}

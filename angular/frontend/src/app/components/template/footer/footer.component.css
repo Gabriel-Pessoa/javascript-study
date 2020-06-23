@@ -1,0 +1,12 @@
+.footer {
+    position: fixed;
+    bottom: 0; /* posição na página, ou seja, no final*/
+    height: 5%;
+    display: flex; /* para posicionar elemento*/
+    justify-content: flex-end;
+}
+
+.footer > span {
+    font-size: 1.1rem;
+    font-weight: 300;
+}
