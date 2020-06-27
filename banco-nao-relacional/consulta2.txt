@@ -1,0 +1,28 @@
+// Estágios no mongo inicia com '$'
+// project é o atributo que recebe como valores o que será projetado na pesquisa
+// o que será projetado deve recebe o número 1
+// como id é projetado por padrão, recebe 0 para impedir esse comportamento
+
+db.estados.aggregate([
+   { $project: { nome: 1, "cidades.nome": 1, _id: 0 } } 
+])
+
+
+
+//Stage Group (atentar para o resultado do stage anterior).
+// critério para agrupar será o _id, passando null para agrupar tudo em um único valor
+// populacaoTotal (campo gerado) = soma da populacao
+
+db.estados.aggregate([
+    { $project: { populacao: { $sum: "$cidades.populacao"}, sigla:1, _id:0 } },
+    { $group: {_id: null, populacaoTotal: {$sum: "$populacao" }} },
+])
+
+
+// Stage Project (atentar para o resultado do stage anterior)
+// Retorna, sem o _id, o atributo populacaoTotal
+db.estados.aggregate([
+    { $project: { populacao: { $sum: "$cidades.populacao"}, sigla:1, _id:0 } },
+    { $group: {_id: null, populacaoTotal: {$sum: "$populacao" }} },
+    { $project: {_id: 0, populacaoTotal: 1 } }
+])

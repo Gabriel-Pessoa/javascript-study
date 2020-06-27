@@ -1,0 +1,24 @@
+// update serve para atualiza. Primeiro parâmetro é de pesquisa para alterar doc específico, o segundo parâmetro é para setar novo valor
+
+db.estados.update({sigla: "SP"},{$set: {populacao: 45340000}})
+
+db.estados.update({sigla: "AL"},{$set: {cidades: [{nome: "Sergipe"}]}})
+
+
+//foi utilizado o operador $push para não substituir as cidades que já existem.
+// Push: Irá incluir um objeto.
+
+db.estados.update(
+    {sigla: "SP"},
+    {$push: {cidades: {nome: "Santos", populacao: 433966}}}
+)
+
+
+// Procure populacao se existir, retornando apenas nome, sem id
+
+db.estados.find({populacao: {$exists: true}}, {_id: 0, nome: 1}) 
+
+
+atualizar a populacao do estado do rio para 16720000
+
+db.estados.update({sigla: "RJ", {$set: { populacao: 16720000 }}})

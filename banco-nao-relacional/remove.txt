@@ -1,0 +1,19 @@
+ db.estados.count()
+
+// irá deletar doc com sigla AC
+db.estados.remove({sigla: "AC"})
+db.estados.count()
+db.estados.find()
+
+//Deleta o primeiro registro com atributo populacao se existir
+db.estados.remove({populacao: {$exists: true}}, 1)
+db.estados.count()
+db.estados.find()
+
+db.estados.update({sigla: "RJ"}, {$set: {populacao: 16720000}})
+
+
+//Remove os docs que têm populacao menor que 20 milhões 
+
+db.estados.remove({populacao: {$lt: 20000000}})
+db.estados.find()

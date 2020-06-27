@@ -1,0 +1,12 @@
+// Match: Traz o estado que contém a cidade pesquisada
+// Unwind: Para cada cidade haverá o registro do estado que pertence
+// Outro Match
+// Projetar apenas o que desejamos
+
+
+db.estados.aggregate([
+    { $match: {"cidades.nome": "Sorocaba" } },
+    { $unwind: "$cidades" },
+    { $match: {"cidades.nome": "Sorocaba" } },
+    { $project: {_id: "$cidades._id" } }
+]).pretty()

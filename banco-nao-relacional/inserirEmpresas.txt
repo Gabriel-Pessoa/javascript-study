@@ -1,0 +1,11 @@
+//Inserindo novo doc junto nova tabela empresas
+
+db.empresas.insert({
+    nome: "Bradesco",
+    estadoId: ObjectId("5ef691cbbeef8a6bf0d6f41f")
+})
+
+db.empresas.insert({
+    nome: "Vale",
+    cidadeId: ObjectId("5ef691cbbeef8a6bf0d6f41e")
+})

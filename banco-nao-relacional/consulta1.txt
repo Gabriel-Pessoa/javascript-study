@@ -1,0 +1,10 @@
+db.estados.find() // traz todos docs do estados
+db.estados.find().pretty() // traz todos docs do estados formatado
+db.estados.findOne() // traz primeiro registro
+db.estados.findOne({sigla: "RJ"})  // traz primeiro registro do objecto como parâmetro 
+db.estados.find({$or: [{sigla: "RJ"}, {sigla: "AC"}]}).pretty() //pesquisa com operador ou; {sigla: "RJ"} ou {sigla: "AC"}
+db.estados.find({populacao: {$exists: true}}).pretty() // pesquisa na coleção se atributo existir; resultado formatado
+db.estados.find().skip(1).limit(2)  // limita a pesquisa inicial =1 e final = 2
+db.estados.count() // quantidades de registro
+db.estados.find({sigla: "SP"}, {nome: 1, sigla: 1, _id: 0}) // pesquisa docs com sigla = 'SP', trazendo apenas na pesquisa os parâmetro nome e sigla; não traz o _id que vem por padrão
+db.estados.find({sigla: "SP"}, {"cidades.nome": 1, _id: 0}) // pesquisa docs com sigla = "SP", trazendo apenas na pesquisa nome da cidade, excluindo o _id

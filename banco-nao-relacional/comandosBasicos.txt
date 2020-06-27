@@ -1,0 +1,15 @@
+help 
+cls   // Limpar terminaol
+show dbs   // mostra bancos
+use wm  // cria banco e começa a usar. Já criado? Usa banco criado
+show dbs 
+db.createCollection('estados')  // cria coleção com nome comom parâmetro
+show dbs 
+show collections   // mostra todas coleções
+db.createCollection('Estados')  // Cria outra coleção, case sensitive
+show collections
+db.Estados.drop()  // apaga coleção
+show collections
+db.estados.drop()
+show collections
+show dbs
