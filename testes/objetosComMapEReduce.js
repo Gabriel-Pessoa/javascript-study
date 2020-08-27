@@ -11,7 +11,6 @@ const filtraCidade = array => array.cidade === 'Recife'
 
 const menorSalario = (acumulador, atual) => acumulador.salario < atual.salario ? acumulador : atual 
 
-
 let resultado = familia.reduce(menorSalario)
 
 console.log(resultado)
