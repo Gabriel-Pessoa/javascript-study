@@ -1,4 +1,6 @@
-class Set {
+// Mudamos o nome da classe para não conflitar com a classe Set nativa do Javascript
+// Anteriormente nomeada de Set invés de Set2
+class Set2 {
     constructor() {
         this.items = {};
     }
@@ -184,14 +186,14 @@ class Set {
 
     isSubsetOf(otherSet) {
         // verificação se a instância atual é maior que a instância otherSet. Se sim, então não é um subconjunto.
-        if(this.size() > otherSet.size()) return false;
+        if (this.size() > otherSet.size()) return false;
         let isSubset = true;
         //Iteramos por todos os elementos do conjunto atual
         // Utilizamos o método every que será chamado enquanto a função callback devolver true, se devolver false o laço será interrompido.
         this.values().every(value => {
             //Verificamos se o elemento está presente em otherSet
             //Se houver algum elemento que não está presente em otherSet, é sinal que de esse conjunto não é subconjunto.
-            if(!otherSet.has(value)) {
+            if (!otherSet.has(value)) {
                 isSubset = false;
                 return false;
             }
@@ -201,6 +203,7 @@ class Set {
         return isSubset
     }
 }
+
 
 //Testes 1
 // const set = new Set();
@@ -216,10 +219,19 @@ class Set {
 // console.log(set.values());
 // set.delete(2);
 // console.log(set.values());
-
-
-// Testes 2
 // const setA = new Set();
+// setA.add(1);
+// setA.add(2);
+// const setB = new Set();
+// setB.add(1);
+// setB.add(2);
+// setB.add(3);
+// const setC = new Set();
+// setC.add(2);
+// setC.add(3);
+// setC.add(4);
+// console.log(setA.isSubsetOf(setB));
+// console.log(setA.isSubsetOf(setC));
 // setA.add(1);
 // setA.add(2);
 // setA.add(3);
@@ -260,19 +272,87 @@ class Set {
 // console.log(differenceAB.values());
 
 //Teste 5 
+// const setA = new Set();
+// setA.add(1);
+// setA.add(2);
+// const setB = new Set();
+// setB.add(1);
+// setB.add(2);
+// setB.add(3);
+// const setC = new Set();
+// setC.add(2);
+// setC.add(3);
+// setC.add(4);
+// console.log(setA.isSubsetOf(setB));
+// console.log(setA.isSubsetOf(setC));
+
+
+// Utilizando a classe Set nativa do JavaScript
+// const set = new Set();
+// set.add(1);
+// console.log(set.values());
+// console.log(set.has(1));
+// console.log(set.size);
+// set.delete(1);
+// set.clear();
+
+//Classe Set nativa da API JavaScript
 const setA = new Set();
 setA.add(1);
 setA.add(2);
+setA.add(3);
 const setB = new Set();
-setB.add(1);
 setB.add(2);
 setB.add(3);
-const setC = new Set();
-setC.add(2);
-setC.add(3);
-setC.add(4);
-console.log(setA.isSubsetOf(setB));
-console.log(setA.isSubsetOf(setC));
+setB.add(4);
 
 
+const union = (set1, set2) => {
+    const unionSet = new Set();
+    set1.forEach(value => unionSet.add(value));
+    set2.forEach(value => unionSet.add(value));
+    return unionSet;
+}
 
+console.log('Union: ', union(setA, setB));
+
+const intersection = (set1, set2) => {
+    const intersectionSet = new Set();
+
+    let smallerSet = Array.from(set1.values());
+    let biggerSet = Array.from(set2.values());
+    if (smallerSet.length > biggerSet.length) [smallerSet, biggerSet] = [biggerSet, smallerSet];
+
+    smallerSet.forEach(value => {
+        if (biggerSet.includes(value)) intersectionSet.add(value);
+    });
+
+    return intersectionSet;
+}
+
+console.log('Intersecção: ', intersection(setA, setB));
+
+
+const difference = (setA, setB) => {
+    const differenceSet = new Set();
+
+    setA.forEach(value => {
+        if (!setB.has(value)) differenceSet.add(value);
+    });
+
+    return differenceSet;
+}
+
+console.log('Difference: ', difference(setA, setB));
+
+
+// Usando o operador Spread para simplificar o código.
+
+//União
+console.log('Union with Spread: ', new Set([...setA, ...setB]));
+
+//Intersecção
+console.log('Intersection with Spread: ', new Set([...setA].filter(x => setB.has(x))));
+
+//Diferença
+console.log('Difference with Spread: ', new Set([...setA].filter(x => !setB.has(x))));
