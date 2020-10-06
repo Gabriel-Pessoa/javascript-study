@@ -1,7 +1,31 @@
-import { defaultToString } from './util';
-import { ValuePair } from './value-pair';
+//import { defaultToString } from './util';
+//import { ValuePair } from './value-pair';
 
-class Dictionary {
+//TEMPORÁRIO!!! {
+class ValuePair {
+    constructor(key, value) {
+        this.key = key;
+        this.value = value;
+    }
+
+    toString() {
+        return `[#${this.key}: ${this.value}]`;
+    }
+}
+
+function defaultToString(item) {
+    if (item === null) {
+        return 'NULL';
+    } else if (item === undefined) {
+        return 'UNDEFINED';
+    } else if (typeof item === 'string' || item instanceof String) {
+        return `${item}`;
+    }
+    return item.toString();
+}
+//  }   TEMPORÁRIO!!! 
+
+export default class Dictionary {
     constructor(toStrFn = defaultToString) {
         this.toStrFn = toStrFn; // Função para transformar uma key em uma String.
         this.table = {}; // Objeto que irá guardar os elementos da classe.
@@ -130,24 +154,152 @@ class Dictionary {
 }
 
 //Teste 1
-const dictionary = new Dictionary();
-dictionary.set('Gandalf', 'gandalf@email.com');
-dictionary.set('John', 'johnsnow@email.com');
-dictionary.set('Tyrion', 'tyrion@email.com');
+// const dictionary = new Dictionary();
+// dictionary.set('Gandalf', 'gandalf@email.com');
+// dictionary.set('John', 'johnsnow@email.com');
+// dictionary.set('Tyrion', 'tyrion@email.com');
 
-console.log(dictionary.hasKey('Gandalf'));
-console.log(dictionary.size());
+// console.log(dictionary.hasKey('Gandalf'));
+// console.log(dictionary.size());
 
-console.log(dictionary.keys());
-console.log(dictionary.values());
-console.log(dictionary.get('Tyrion'));
+// console.log(dictionary.keys());
+// console.log(dictionary.values());
+// console.log(dictionary.get('Tyrion'));
 
-dictionary.remove('John');
-console.log(dictionary.keys());
-console.log(dictionary.values());
-console.log(dictionary.keyValues());
+// dictionary.remove('John');
+// console.log(dictionary.keys());
+// console.log(dictionary.values());
+// console.log(dictionary.keyValues());
 
-dictionary.forEach((k, v) => {
-    console.log('forEach: ', `key: ${k}, value: ${v}`);
-});
+// dictionary.forEach((k, v) => {
+//     console.log('forEach: ', `key: ${k}, value: ${v}`);
+// });
 
+
+class HashTable {
+    constructor(toStrFn = defaultToString) {
+        this.toStrFn = toStrFn;
+        this.table = {};
+    }
+
+    // Add novo item à tabela hash (ou pode atualizá-la também)
+    put(key, value) {
+        //Verificação se parâmetros são válidos.
+        if (key != null && value != null) {
+            const position = this.hashCode(key); //Criamos um chave hash ASCII
+            this.table[position] = new ValuePair(key, value); //Com essa chave incluimos o novo par [chave, valor]
+            return true;
+        }
+        return false;
+    }
+
+    // Remove o value da tabela hash usando a key
+    remove(key) {
+        // Inicialmente devemos saber qual posição acessar.
+        const hash = this.hashCode(key);
+        //Adquirimos o par do elemento específicado.
+        const valuePair = this.table[hash];
+        //Verificação para saber se é um valor válido.
+        if (valuePair != null) {
+            //Remove elemento
+            delete this.table[hash]; //Invés de usar o operador delete, podemos atribuir ao elemento o valor null ou undefined.
+            return true;
+        }
+        return false;
+    }
+
+    // Devolve um value específico encontrado com a key
+    get(key) {
+        //Obtemos a posição do parâmetro key especificado
+        const valuePair = this.table[this.hashCode(key)];
+        return valuePair == null ? undefined : valuePair.value;
+    }
+
+    //Cria o valor hash para a chave
+    loseloseHashCode(key) {
+        //Verificação. Se key for um number, apenas devolva.
+        if (typeof key === 'number') {
+            return key;
+        }
+        //Converte a key em uma string caso seja um objeto, e não uma string.
+        const tableKey = this.toStrFn(key);
+
+        let hash = 0; // Valor inicial padrão para atribuição aditiva
+
+        //Itera por cada caractere da string convertida.
+        for (let i = 0; i < tableKey.length; i++) {
+            //Gera um número baseado na soma do valor de cada caractere ASCII que compõe a key.
+            hash += tableKey.charCodeAt(i);
+        }
+        //Devolve o valor de hash. Para trabalhar com valores menores, devemos usar o resto da divisão usando um número arbitrário.
+        return hash % 37;
+    }
+
+    // Retorna o método loseloseHashCode
+    hashCode(key) {
+        return this.loseloseHashCode(key);
+    }
+
+
+    toString() {
+        if (this.isEmpty()) {
+            return '';
+        }
+        const keys = Object.keys(this.table);
+        let objString = `${keys[0]} => ${this.table[keys[0]].toString()}`;
+        for (let i = 1; i < keys.length; i++) {
+            objString = `${objString},${keys[i]} => ${this.table[keys[i]].toString()}`;       
+        }
+        return objString;
+    }
+
+    size() {
+        return Object.keys(this.table).length;
+    }
+
+    isEmpty() {
+        return this.size() === 0;
+    }
+}
+
+//Teste 2
+// const hash = new HashTable();
+// hash.put('Gandalf', 'gandalf@email.com')
+// hash.put('John', 'johnsnow@email.com')
+// hash.put('Tyrion', 'tyrion@email.com')
+// console.log(hash.hashCode('Gandalf') + ' - Gandalf');
+// console.log(hash.hashCode('John') + ' - John');
+// console.log(hash.hashCode('Tyrion') + ' - Tyrion');
+// console.log(hash.get('Gandalf'));
+// console.log(hash.get('Loiane'));
+// hash.remove('Gandalf');
+// console.log(hash.get('Gandalf'));
+
+
+//Teste 3
+// const hash = new HashTable();
+// hash.put('Ygritte', 'ygritte@email.com');
+// hash.put('Jonathan', 'jonathan@email.com');
+// hash.put('Jamie', 'jamie@email.com');
+// hash.put('Jack', 'jack@email.com');
+// hash.put('Jasmine', 'jasmine@email.com');
+// hash.put('Jake', 'jake@email.com');
+// hash.put('Nathan', 'nathan@email.com');
+// hash.put('Athelstan', 'athelstan@email.com');
+// hash.put('Sue', 'sue@email.com');
+// hash.put('Aethelwulf', 'aethelwulf@email.com');
+// hash.put('Sargeras', 'sargeras@email.com');
+
+// console.log(hash.hashCode('Ygritte') + ' - Ygritte');
+// console.log(hash.hashCode('Jonathan') + ' - Jonathan');
+// console.log(hash.hashCode('Jamie') + ' - Jamie');
+// console.log(hash.hashCode('Jack') + ' - Jack');
+// console.log(hash.hashCode('Jasmine') + ' - Jasmine');
+// console.log(hash.hashCode('Jake') + ' - Jake');
+// console.log(hash.hashCode('Nathan') + ' - Nathan');
+// console.log(hash.hashCode('Athelstan') + ' - Athelstan');
+// console.log(hash.hashCode('Sue') + ' - Sue');
+// console.log(hash.hashCode('Aethelwulf') + ' - Aethelwulf');
+// console.log(hash.hashCode('Sargeras') + ' - Sargeras');
+
+// console.log(hash.toString());
