@@ -2,7 +2,7 @@ class Queue {
     constructor() {
         this.count = 0; // prooriedade que ajuda a controlar o tamanho da fila
         this.lowestCount = 0; //propriedade que ajuda a controlar os elementos da frente da fila
-        this.items = {} // items
+        this.items = {} // items. Objeto, estrura da dados para salvar os elementos da fila. Torna o acesso ao elemento mais eficiente.
     }
 
     //add elemento ao final da fila
@@ -15,7 +15,7 @@ class Queue {
     dequeue() {
         if (this.isEmpty()) return undefined; //verifica se a fila está vazia
         const result = this.items[this.lowestCount]; //guarda o valor numa variável antes de remover
-        delete this.items[this.lowestCount]; // remove elemento, usando como argumento a variável que controla a frente da fila
+        delete this.items[this.lowestCount]; // remove elemento, usando como propriedade a variável que controla a frente da fila
         this.lowestCount++; //propriedade de controle de remoção de elemento da frente da fila 
         return result; // retorna elemento removido
     }
@@ -29,10 +29,10 @@ class Queue {
     // retorna um booleano para fila vazia ou não
     isEmpty() {
         // se fila estiver vazia devolve true, senão false.
-        return this.count - this.lowestCount === 0;
+        // return this.count - this.lowestCount === 0;
 
         //segunda opção
-        // return this.size() === 0;
+        return this.size() === 0;
     }
 
     // retorna tamanho da fila
@@ -40,7 +40,7 @@ class Queue {
         return this.count - this.lowestCount;
     }
 
-    // método que limpa ou retorna ao estado inicial a fila
+    // método que limpa e retorna ao estado inicial a fila
     clear() {
         this.items = {};
         this.count = 0;
@@ -50,6 +50,7 @@ class Queue {
     toString() {
         if (this.isEmpty()) return '';
 
+        //começa a iterar pela frente da fila, sendo o valor de lowestCount o primeiro elemento.
         let objString = `${this.items[this.lowestCount]}`;
 
         for (let i = this.lowestCount + 1; i < this.count; i++) {
@@ -60,14 +61,7 @@ class Queue {
     }
 }
 
-//const queue = new Queue();
-// queue.enqueue(5);
-// queue.enqueue(8);
-
-// console.log(queue.items);
-// console.log(queue.dequeue());
-// console.log(queue.items);
-// console.log(queue.toString());
+// const queue = new Queue();
 // console.log(queue.isEmpty());
 // queue.enqueue('John');
 // queue.enqueue('Jack');
@@ -90,9 +84,11 @@ class Deque {
     }
 
     isEmpty() {
-        return this.count - this.lowestCount === 0;
+        // Primeira opção
+        // return this.count - this.lowestCount === 0;
+
         //Segunda opção
-        //return this.size() === 0;
+        return this.size() === 0;
     }
 
     clear() {
@@ -143,15 +139,23 @@ class Deque {
 
         } else { // cenário 3: lowestCount = 0
 
+            // Opção 1: muito custoso, tem que iterar por toda a fila deslocando os elementos para a direita uma posição.
             /* Precisamos desocupar a primeira posição afim de colocar um elemento na frente da fila, 
-                deslocando todos os elementos para trás 1 posição*/
+                deslocando todos os elementos para trás 1 posição
             for (let i = this.count; i > 0; i--) {
                 this.items[i] = this.item[i - 1];
             }
-
             this.count++; // adicionar elemento na frente da fila incrementa tamanho da fila
-            this.lowestCount = 0; // permanece igual a zero
+            this.lowestCount = 0; // permanece igual a zero, pois não foi removido, mas sim, add elemento.
             this.items[0] = element; // com posição agora desocupada, podemos adicionar o elemento na frente da fila.
+            */
+
+            //Opção 2: economiza processamento, porém trabalha com números negativos.
+
+            this.lowestCount--; // adiciona elemento a frente da fila
+            this.items[this.lowestCount] = element;
+            // Não posso incrementar o valor de count, senão causará inconsistência no números de elementos  
+
         }
 
     }
@@ -186,6 +190,7 @@ class Deque {
         if (this.isEmpty()) return undefined;
         return this.items[this.lowestCount];
     }
+
     //visualiza o primeiro elemento de trás da fila
     peekBack() {
         if (this.isEmpty()) return undefined;
@@ -203,13 +208,13 @@ class Deque {
 // console.log(deque.toString());
 // console.log(deque.size());
 // console.log(deque.isEmpty());
+// console.log(deque.lowestCount);
 // deque.removeFront();
 // console.log(deque.toString());
 // deque.removeBack();
 // console.log(deque.toString());
 // deque.addFront('John');
 // console.log(deque.toString());
-// console.log(deque.size());
 
 
 // função que simula o jogo Batata Quente usando a classe de fila Queue
@@ -224,7 +229,7 @@ function hotPotato(elementsList, num) {
         queue.enqueue(elementsList[i]);
     }
 
-    while (queue.size() > 1) {
+    while (queue.size() > 1) { // maior que 1, pq tem que sobrar o vencedor
 
         //o número passado como segundo argumento determina quantas repetições terá o laço
         for (let i = 0; i < num; i++) {
@@ -253,8 +258,8 @@ function hotPotato(elementsList, num) {
 // result.eliminated.forEach(name => {
 //     console.log(`${name} foi eliminado do jogo Batata Quente`);
 // });
-
 // console.log(`O vencedor é: ${result.winner}`);
+
 
 function palindromeChecker(aString) {
     // verificação para saber se string passada como argumento é válida.
@@ -274,7 +279,7 @@ function palindromeChecker(aString) {
         deque.addBack(lowerString.charAt(i)); // add cada caractere a fila
     }
 
-    while (deque.size() > 1 && isEqual) { //quando size == 1 ou isQual == false, sai do laço.
+    while (deque.size() > 1 && isEqual) { //quando size <= 1 ou isQual == false, sai do laço.
         firstChar = deque.removeFront();// remove o primeiro elemento
         lastChar = deque.removeBack(); // remove o último elemento
         if (firstChar !== lastChar) { // comparativo, se for diferente: setar variável para false;
