@@ -1,12 +1,11 @@
-import { defaultEquals } from '../util';
-import { Node } from './models/linked-list-models'; //Representa o item que queremos adicionar na lista
+const { defaultEquals, Node, Compare, defaultCompare } = require('./util');
 
-export default class LinkedList {
+class LinkedList {
     //constructor recebe uma função como argumento, caso não seja passado, assume função padrão.
     constructor(equalsFn = defaultEquals) {
-        this.count = 0; //armazena o número de elementos que temos na lista
-        this.head = undefined; // referência ao primeiro elemento
-        this.equalsFn = equalsFn; //comparação de igualdade entre os elementos, será implementado em algum método.
+        this._count = 0; // armazena o número de elementos que temos na lista
+        this._head = undefined; // referência ao primeiro elemento
+        this._equalsFn = equalsFn; //comparação de igualdade entre os elementos, será implementado em algum método.
     }
 
     //add elementos ao final da lista
@@ -17,29 +16,29 @@ export default class LinkedList {
         let current;
 
         //1) primeiro cenário: Lista vazia
-        if (this.head == null) { // this.head === undefined || this.head === null
-            this.head = node; // cabeça recebe o nó
+        if (this._head == null) { // this.head === undefined || this.head === null
+            this._head = node; // cabeça recebe o nó
         } else { // 2) segundo cenário: Lista não está vazia.
-            current = this.head;
+            current = this._head;
             while (current.next != null) { // obtém o último item
                 current = current.next;
             }
             // e atribui o novo elemento ao último current.next para criar a ligação
             current.next = node;
         }
-        this.count++;
+        this._count++; // incrementa o tamanho da lista
     }
 
     //insere elemento em posição específica
     insert(element, index) {
         // verificação de valor dentro do intervalo válido
-        if (index >= 0 && index <= this.count) { //index <= this.count (significa que posso adicionar elemento após o último elemento (index - 1))
+        if (index >= 0 && index <= this._count) { //index <= this.count (significa que posso adicionar elemento após o último elemento (index - 1))
             const node = new Node(element);
 
             if (index === 0) {
-                const current = this.head; // a variável current aponta para o índice 0, antes da adição de um novo elemento.
+                const current = this._head; // a variável current aponta para o índice 0, antes da adição de um novo elemento.
                 node.next = current; // faz a ligação do novo nó que ocupará o lugar do current(índice 0), jogando o current para a próxima posição(índice 1).
-                this.head = node; // atribui o novo elemento ao head, que ocupa o índice 0, já com as ligações subsequentes feita acima.
+                this._head = node; // atribui o novo elemento ao head, que ocupa o índice 0, já com as ligações subsequentes feita acima.
             }
             else {
                 const previous = this.getElementAt(index - 1); //valor anterior ao valor corrente, ou seja, uma posição antes da adição do novo elemento
@@ -53,7 +52,7 @@ export default class LinkedList {
                 node.next = current; //ligação do valor corrente ao nó que irá ocupar o seu lugar e faze-lo pular uma posição à frente
                 previous.next = node; //atribuir ao valor anterior o novo nó, já com a ligação feita para os nós subsequentes.
             }
-            this.count++; //atualiza o tamanho da lista
+            this._count++; //atualiza o tamanho da lista
             return true; // retorno da função
         }
         return false;
@@ -61,13 +60,14 @@ export default class LinkedList {
 
     //retorna elemento em posição específica.
     getElementAt(index) {
-        if (index >= 0 && index <= this.count) { //index <= this.count (significa que posso obter o último elemento após o (index - 1))
-            let node = this.head;
+        if (index >= 0 && index <= this._count) { //index <= this.count (significa que posso obter o último elemento após o (index - 1))
+            let node = this._head;
 
             // intera pela lista até chega no elemento passado como index
-            for (let i = 0; i < index && node != null; i++) {
+            for (let i = 1; i <= index && node != null; i++) {
                 node = node.next;
             }
+
             return node; // retorna o elemento do índice desejado
         }
         return undefined;
@@ -81,12 +81,12 @@ export default class LinkedList {
 
     //procura na lista o elemento e retorna seu índice, caso não encontre, retorna -1.
     indexOf(element) {
-        let current = this.head;
+        let current = this._head;
         //Não entra no laço, caso lista vazia
-        for (let i = 0; i < this.count && current != null; i++) { //somente por garantia, verificar-se a variável current é diferente de null ou undefined.
+        for (let i = 0; i < this._count && current != null; i++) { //somente por garantia, verificar-se a variável current é diferente de null ou undefined.
             //Para cada interação compara-se o elemento atual do índice com o passado como argumento
-            if (this.equalsFn(element, current.element)) return i; // interrompe o método, retornando o índice
-            current = current.next; //interando pela lista
+            if (this._equalsFn(element, current.element)) return i; // interrompe o método, retornando o índice
+            current = current.next; //iterando pela lista
         }
         return -1; // caso não encontre o elemento ou lista vazia
     }
@@ -94,15 +94,15 @@ export default class LinkedList {
     //remove elemento de uma posição específica
     removeAt(index) {
         //verificação para evitar valores fora do intevalo
-        if (index >= 0 && index < this.count) { // posição válida do índice, do zero(incluso) até o count - 1
-            let current = this.head;
+        if (index >= 0 && index < this._count) { // posição válida do índice, do zero(incluso) até o count - 1
+            let current = this._head;
             //remove o primeiro elemento
             if (index === 0) {
-                this.head = current.next; // atribui ao head o próximo nó, fazendo a ligação e pulando o elemento de índice zero
+                this._head = current.next; // atribui ao head o próximo nó, fazendo a ligação e pulando o elemento de índice zero
                 // outra alternativa para o código acima: this.head = this.head.next;
             } else {
                 let previous;
-                // interar a lista até o elemento passado como índice
+                // iterar a lista até o elemento passado como índice
                 for (let i = 0; i < index; i++) {
                     previous = current;
                     current = current.next;
@@ -117,7 +117,7 @@ export default class LinkedList {
                 // faz a ligação de previous com o next de current, pulando elemento passado no index para removê-lo
                 previous.next = current.next;
             }
-            this.count--;
+            this._count--;
             return current.element;
         }
         return undefined; // caso não passe na verificação
@@ -125,7 +125,7 @@ export default class LinkedList {
 
     //retorna tamanho da lista
     size() {
-        return this.count;
+        return this._count;
     }
 
     //Retorna true caso a lista esteja vazia e false caso contrário.
@@ -135,69 +135,71 @@ export default class LinkedList {
 
     //retorna o primeiro elemento da lista
     getHead() {
-        return this.head;
+        return this._head;
     }
 
     //retorna uma representação em string da lista ligada
     toString() {
-        if (this.head == null) return ''; // verificação de lista vazia(null ou undefined)
+        if (this._head == null) return ''; // verificação de lista vazia(null ou undefined)
 
-        let objString = `${this.head.element}`; //inicia sempre com primeiro elemento
-        let current = this.head.next; // variável current recebe próximo nó. Obtêm a posição 0 (índice 0) da lista
+        let objString = `${this._head.element}`; //inicia sempre com primeiro elemento
+        let current = this._head.next; // variável current recebe próximo nó. Obtêm a posição 0 (índice 0) da lista
         for (let i = 1; i < this.size() && current != null; i++) {
             objString = `${objString},${current.element}`; // concatena os elemento durante interação do laço, do índice 1 em diante
-            current = current.next; // avança pela lista, interando a cada laço
+            current = current.next; // avança pela lista, iterando a cada laço
         }
         return objString; // retorna a string com o conteúdo da lista
     }
 }
 
 // const list = new LinkedList();
-// list.push(15);
-// list.push(10);
 // list.push(20);
 // list.push(25);
 // list.push(35);
-
 
 /* É uma extensão do node, acrescido de mais uma propriedade, que
     faz referência aos elementos anteriores de cada posição da lista
 */
 class DoublyNode extends Node {
-    constructor(element, next, prev) {
-        super(element, next); // herda propriedades da classe pai
-        this.prev = prev; // instancia sua própria propriedade
+    // constructor(element, next, prev) {
+    //     super(element, next); // herda propriedades da classe pai
+    //     this.prev = prev; // instancia sua própria propriedade
+    // }
+    constructor(element) {
+        super(element);
+        this.prev = undefined;
     }
 }
 
-//Lista duplamente ligada. Interar do ínicio até o final, ou, vice-versa.
+//Lista duplamente ligada. Iterar do ínicio até o final, ou, vice-versa.
 class DoublyLinkedList extends LinkedList {
     constructor(equalsFn = defaultEquals) {
         super(equalsFn); // herda propriedades e métodos da classe pai. Inicializa this.head, this.count e this.equalsFn
-        this.tail = undefined; // instancia sua própria propriedade. Referência o último elemento da lista.
+        this._tail = undefined; // instancia sua própria propriedade. Referência o último elemento da lista.
     }
 
     // Sobrescrevendo método da classe pai.
     // Método insere um elemento em qualquer posição
     insert(element, index) {
-        if (index >= 0 && index <= this.count) { //index <= this.count (significa que posso adicionar elemento após o último elemento (index - 1))
+        if (index >= 0 && index <= this._count) { //index <= this.count (significa que posso adicionar elemento após o último elemento (index - 1))
             const node = new DoublyNode(element);
-            let current = this.head;
+            let current = this._head;
+
             //primeiro cenário para add de elementos: Add na posição 0
             if (index === 0) {
-                if (this.head == null) { // this.head === undefined || this.head === null, ou seja, lista vazia.
-                    this.head = node;
-                    this.tail = node;
+                if (this._head == null) { // this.head === undefined || this.head === null, ou seja, lista vazia.
+                    this._head = node;
+                    this._tail = node;
                 } else { //Lista não vazia
-                    node.next = this.head;
+                    node.next = current;
                     current.prev = node;
-                    this.head = node;
+                    this._head = node;
                 }
-            } else if (index === this.count) { // segundo cenário: inserir após último item
-                current = this.tail; //obtêm o último elemento antes da adição do novo
+            } else if (index === this._count) { // segundo cenário: inserir após último item
+                current = this._tail; //obtêm o último elemento antes da adição do novo
                 current.next = node; //atribui ao next desse último, o elemento que queremos adicionar após ele
                 node.prev = current; // o prev desse último elemento aponta para seu antecessor, que será o penúltimo elemento da lista
-                this.tail = node; // atribuimos o novo nó/elemento ao último elemento da lista
+                this._tail = node; // atribuimos o novo nó/elemento ao último elemento da lista
             } else { // terceiro cenário: inserir no meio da lista
                 /*  for (let i = 1; i < index && current.next != null ; i++) {
                         previous = current.prev
@@ -212,7 +214,7 @@ class DoublyLinkedList extends LinkedList {
                 current.prev = node;
                 node.prev = previous;
             }
-            this.count++;
+            this._count++;
             return true;
         }
         return false;
@@ -221,20 +223,20 @@ class DoublyLinkedList extends LinkedList {
     // Sobrescrevendo método da classe pai.
     // Método remove um elemento em qualquer posição
     removeAt(index) {
-        if (index >= 0 && index < this.count) {
-            let current = this.head;
+        if (index >= 0 && index < this._count) {
+            let current = this._head;
             if (index === 0) {
-                this.head = current.next;
+                this._head = current.next;
 
-                if (this.count === 1) { // se houver apenas um item, atualiza também o tail
-                    this.tail = undefined;
+                if (this._count === 1) { // se houver apenas um item, atualiza também o tail
+                    this._tail = undefined;
                 } else { // maior que 1 item
-                    this.head.prev = undefined; // ou current.next.prev = undefined;
+                    this._head.prev = undefined; // ou current.next.prev = undefined;
                 }
-            } else if (index === this.count - 1) { // último item
-                current = this.tail;
-                this.tail = current.prev;
-                this.tail.next = undefined;
+            } else if (index === this._count - 1) { // último item
+                current = this._tail;
+                this._tail = current.prev;
+                this._tail.next = undefined;
             } else {
                 /* for(let i = 1; i < index && current.next != null; i++) {
                    current = current.next;
@@ -244,7 +246,7 @@ class DoublyLinkedList extends LinkedList {
                 previous.next = current.next;
                 current.next.prev = previous;
             }
-            this.count--;
+            this._count--;
             return current.element;
         }
         return undefined;
@@ -259,18 +261,18 @@ class CircularLinkedList extends LinkedList { // herdará ou terá acesso a toda
     //métodos
     //Sobrescrevendo método da classe pai
     insert(element, index) {
-        if (index >= 0 && index <= this.count) { //index <= this.count (significa que posso adicionar elemento após o último elemento (index - 1))
-            const node = new DoublyNode(element);
-            let current = this.head;
+        if (index >= 0 && index <= this._count) { //index <= this.count (significa que posso adicionar elemento após o último elemento (index - 1))
+            const node = new Node(element);
+            let current = this._head;
             if (index === 0) {
-                if (this.head == null) { //Lista vazia
-                    this.head = node;
-                    node.next = this.head;
+                if (this._head == null) { //Lista vazia
+                    this._head = node;
+                    node.next = this._head;
                 } else {
                     node.next = current;
                     current = this.getElementAt(this.size()); // referencia do último elemento, ou tail.
-                    this.head = node;
-                    current.next = this.head; // faz a ligação do último elemento ao head, formando a lista circular.
+                    this._head = node;
+                    current.next = this._head; // faz a ligação do último elemento ao head, formando a lista circular.
                 }
             } else {
                 const previous = this.getElementAt(index - 1);
@@ -278,7 +280,7 @@ class CircularLinkedList extends LinkedList { // herdará ou terá acesso a toda
                 node.next = current;
                 previous.next = node;
             }
-            this.count++;
+            this._count++;
             return true;
         }
         return false;
@@ -286,16 +288,16 @@ class CircularLinkedList extends LinkedList { // herdará ou terá acesso a toda
 
     //Sobrescrevendo método da classe pai
     removeAt(index) {
-        if (index >= 0 && index < this.count) {
-            let current = this.head;
+        if (index >= 0 && index < this._count) {
+            let current = this._head;
             if (index === 0) {
                 if (this.size() === 1) { // apenas um elemento na lista
-                    this.head = undefined;
+                    this._head = undefined;
                 } else {
-                    const removed = this.head; // elemento que será removido
+                    const removed = this._head; // elemento que será removido
                     current = this.getElementAt(this.size()); //referência ao último nó
-                    this.head = this.head.next;
-                    current.next = this.head;
+                    this._head = this._head.next;
+                    current.next = this._head;
                     current = removed; //armazena o elemento removido para ser retornado no final do método
                 }
             } else {
@@ -303,25 +305,13 @@ class CircularLinkedList extends LinkedList { // herdará ou terá acesso a toda
                 current = previous.next;
                 previous.next = current.next;
             }
-            this.count--;
+            this._count--;
             return current.element;
         }
         return undefined;
     }
 }
 
-
-const Compare = {
-    LESS_THAN: -1,
-    BIGGER_THAN: 1
-};
-
-function defaultCompare(a, b) {
-    if (a === b) {
-        return 0;
-    }
-    return a < b ? Compare.LESS_THAN : Compare.BIGGER_THAN;
-}
 
 // essa classe herdará todos os métodos e propriedades da classe LinkedList
 class SortedLinkedList extends LinkedList {
@@ -348,10 +338,10 @@ class SortedLinkedList extends LinkedList {
     }
 
     getIndexNextSortedElement(element) {
-        let current = this.head;
+        let current = this._head;
         let i = 0;
         // percorre toda a lista.
-        for (; i < this.size() && current; i++) { // i < tamanho da lista && i != false
+        for (; i < this.size() && current; i++) { // i < tamanho da lista && current != false
 
             // variável assume valor -1, 0 ou 1 que compara elemento de entrada do método e o elemento da lista
             const comp = this.compareFn(element, current.element);
@@ -369,12 +359,13 @@ class SortedLinkedList extends LinkedList {
 // usando listas ligadas e variantes em pilhas, filas e deques
 class StackLinkedList {
     constructor() {
-        this.items = new DoublyLinkedList();
+        this.items = new DoublyLinkedList(); // Instancia da classe DoublyLinkedList
     }
 
     push(element) {
         this.items.push(element);
     }
+
 
     pop() {
         if (this.isEmpty()) {
@@ -384,7 +375,7 @@ class StackLinkedList {
     }
 
     peek() {
-        if(this.isEmpty()) {
+        if (this.isEmpty()) {
             return undefined;
         }
         return this.items.getElementAt(this.size() - 1).element;
@@ -406,3 +397,5 @@ class StackLinkedList {
         return this.items.toString();
     }
 }
+
+module.exports = { LinkedList };

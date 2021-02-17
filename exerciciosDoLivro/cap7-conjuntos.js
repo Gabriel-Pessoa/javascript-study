@@ -131,11 +131,12 @@ class Set2 {
         let smallerSet = otherValues;
 
         // Comparação de tamanho dos conjunto, caso o conjunto específico seja maior que o atual, trocamos os valores.
-        //if(smallerSet.length > biggerSet.length) [smallerSet, biggerSet] = [biggerSet, smallerSet];
-        if (otherValues.length - values.length > 0) {
-            biggerSet = otherValues;
-            smallerSet = values;
-        }
+        // if (otherValues.length - values.length > 0) {
+        //     biggerSet = otherValues;
+        //     smallerSet = values;
+        // } OU
+        if (smallerSet.length > biggerSet.length) [smallerSet, biggerSet] = [biggerSet, smallerSet];
+
 
         // iteramos pelo conjunto menor economizando processamento
         smallerSet.forEach(value => {
@@ -297,14 +298,14 @@ class Set2 {
 // set.clear();
 
 //Classe Set nativa da API JavaScript
-const setA = new Set();
-setA.add(1);
-setA.add(2);
-setA.add(3);
-const setB = new Set();
-setB.add(2);
-setB.add(3);
-setB.add(4);
+// const setA = new Set();
+// setA.add(1);
+// setA.add(2);
+// setA.add(3);
+// const setB = new Set();
+// setB.add(2);
+// setB.add(3);
+// setB.add(4);
 
 
 const union = (set1, set2) => {
@@ -314,23 +315,31 @@ const union = (set1, set2) => {
     return unionSet;
 }
 
-console.log('Union: ', union(setA, setB));
+const setA = new Set([1, 2, 3, 4, 5, 6, 7]); // Conjunto A = {1, 2, 3, 4, 5, 6, 7}
+const setB = new Set([4, 6]); // Conjunto B = {4, 6}
 
+//Função Pura (paradigma funcional). 
 const intersection = (set1, set2) => {
-    const intersectionSet = new Set();
+    const intersectionSet = new Set(); // Novo conjunto
 
-    let smallerSet = Array.from(set1.values());
-    let biggerSet = Array.from(set2.values());
-    if (smallerSet.length > biggerSet.length) [smallerSet, biggerSet] = [biggerSet, smallerSet];
+    let smallerSet = set1;
+    let biggerSet = set2;
 
+    //Se o conjunto smallerSet for maior que o conjunto biggerSet, atribua o valor de biggerSet a smallerSet e vice-versa.
+    if (smallerSet.size > biggerSet.size) [smallerSet, biggerSet] = [biggerSet, smallerSet]; 
+
+    //Iterando pelo menor conjunto, economizando processamento.
     smallerSet.forEach(value => {
-        if (biggerSet.includes(value)) intersectionSet.add(value);
+        // Operação de interseção
+        if (biggerSet.has(value)) { 
+            intersectionSet.add(value);
+        }
     });
 
-    return intersectionSet;
+    return intersectionSet; // Retorna novo conjunto.
 }
 
-console.log('Intersecção: ', intersection(setA, setB));
+console.log('Interseção: ', intersection(setA, setB)); // Saída: Interseção:  Set(2) { 4, 6 }
 
 
 const difference = (setA, setB) => {
@@ -343,16 +352,16 @@ const difference = (setA, setB) => {
     return differenceSet;
 }
 
-console.log('Difference: ', difference(setA, setB));
+//console.log('Difference: ', difference(setA, setB));
 
 
 // Usando o operador Spread para simplificar o código.
 
 //União
-console.log('Union with Spread: ', new Set([...setA, ...setB]));
+//console.log('Union with Spread: ', new Set([...setA, ...setB]));
 
 //Intersecção
-console.log('Intersection with Spread: ', new Set([...setA].filter(x => setB.has(x))));
+//console.log('Intersection with Spread: ', new Set([...setA].filter(x => setB.has(x))));
 
 //Diferença
-console.log('Difference with Spread: ', new Set([...setA].filter(x => !setB.has(x))));
+//console.log('Difference with Spread: ', new Set([...setA].filter(x => !setB.has(x))));

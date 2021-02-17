@@ -1,4 +1,4 @@
-export function defaultToString(item) {
+function defaultToString(item) {
     if (item === null) {
         return 'NULL';
     } else if (item === undefined) {
@@ -8,3 +8,16 @@ export function defaultToString(item) {
     }
     return item.toString();
 }
+
+class ValuePair {
+    constructor(key, value) {
+        this.key = key;
+        this.value = value;
+    }
+
+    toString() {
+        return `[#${this.key}: ${this.value}]`;
+    }
+}
+
+module.exports = { defaultToString, ValuePair };
