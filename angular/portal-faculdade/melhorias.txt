@@ -1,0 +1,6 @@
+1) Acrescentar o atributo id em Student e Teacher, para facilitar a implementação dos métodos abaixo.
+2) Implementar o método update.
+3) Implementar o método delete.
+4) Criar uma backend conectado ao banco de dados, para realizar todos as operações CRUD. Esses dados 
+não ficaram perdidos após recarregar a página.
+5) Melhorar arte do site.

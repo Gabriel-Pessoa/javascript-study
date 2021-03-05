@@ -1,0 +1,11 @@
+.header {
+    grid-area: header;
+}
+
+.header .title {
+    margin-left: 5px;
+}
+
+.header mat-toolbar {
+    background-color: #ffcd00;
+}

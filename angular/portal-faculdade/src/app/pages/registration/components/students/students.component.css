@@ -1,0 +1,15 @@
+.student .card-container {
+    text-align: center;
+    margin-left: 33vw;
+    width: 33%;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+@media(max-width: 600px) {
+    .student .card-container {
+        margin-left: 0;
+        width: 100%;
+    }
+}

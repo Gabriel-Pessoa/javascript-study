@@ -1,0 +1,17 @@
+.container-template .content {
+    grid-area: content;
+}
+
+.container-template {
+    height: 100vh;
+    
+    display: grid;
+    grid-template-rows: 60px 1fr 60px;
+    grid-template-columns: 1fr;
+
+    grid-template-areas: 
+        "header"
+        "content"
+        "footer"
+    ;
+}

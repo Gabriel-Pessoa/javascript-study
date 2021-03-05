@@ -1,0 +1,11 @@
+.footer {
+    grid-area: footer;
+}
+
+.footer a {
+    text-decoration: none;
+}
+
+.footer mat-toolbar {
+    background-color: #ffcd00;
+}

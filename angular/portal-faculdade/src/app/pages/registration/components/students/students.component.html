@@ -1,0 +1,25 @@
+<div class="student">
+
+    <ng-container *ngIf="(data$ | async) as data ">
+        <app-table [dataSource]="data" [displayedColumns]="['name', 'age', 'email', 'course']"></app-table>
+    </ng-container>
+
+    <span *ngIf="!(data$ | async)">Carregando...</span>
+
+    <mat-card class="card-container">
+        <mat-card-title>Cadastrar novo aluno</mat-card-title>
+        <form novalidate [formGroup]="student" (ngReset)="restartForm()" *ngIf="student">
+            <mat-card-content>
+                <app-form-field label="nome" controlName="name" [formGroup]="student"></app-form-field>
+                <app-form-field label="idade" controlName="age" [formGroup]="student" type="number"></app-form-field>
+                <app-form-field label="email" controlName="email" [formGroup]="student"></app-form-field>
+                <app-form-field label="curso" controlName="course" [formGroup]="student"></app-form-field>
+            </mat-card-content>
+            <mat-card-actions>
+                <button (click)="submit($event)" mat-raised-button color="primary">Salvar</button>
+                <button type="reset" mat-raised-button color="accent">Reiniciar</button>
+            </mat-card-actions>
+        </form>
+    </mat-card>
+
+</div>
