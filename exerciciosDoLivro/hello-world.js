@@ -1,34 +1,22 @@
-interface Comparable<T> {
-    compareTo(b: T): number;
-}
-
-class MyObject implements Comparable<MyObject> {
-    age: number;
-    compareTo(b: MyObject): number {
+"use strict";
+exports.__esModule = true;
+var MyObject = /** @class */ (function () {
+    function MyObject() {
+    }
+    MyObject.prototype.compareTo = function (b) {
         if (this.age === b.age) {
             return 0;
         }
         return this.age > b.age ? 1 : -1;
-    }
-}
-
+    };
+    return MyObject;
+}());
 // @ts-check
-
 /**
  * Calcular a área de um círculo
  * @param {number} r (raio do círculo)
  */
-
-const circleArea = r => 3.14 * (r ** 2);
-
-export interface pessoa {
-    nome: string;
-    idade: number;
-    email: string;
-    curso: string;
-}
-
-
+var circleArea = function (r) { return 3.14 * (Math.pow(r, 2)); };
 // const convertArrayToObject = (array: any[]) => {
 //     const initialValue = {};
 //     return array.reduce((obj, item) => {
@@ -38,8 +26,5 @@ export interface pessoa {
 //         };
 //     }, initialValue);
 // };
-
-const testePessoa: pessoa = { nome: 'Gabriel', idade: 25, email: 'gabriel@emai.com', curso: 'Análise e Desenvolvimento de Sistemas' };
-
-
+var testePessoa = { nome: 'Gabriel', idade: 25, email: 'gabriel@emai.com', curso: 'Análise e Desenvolvimento de Sistemas' };
 console.log(Object.keys(testePessoa));

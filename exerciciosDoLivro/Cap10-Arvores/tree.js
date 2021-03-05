@@ -117,11 +117,11 @@ class BinarySearchTree {
         if (node.left == null) {
             return node;
         } else {
-            return this.minNode(node.left); // Sem o return no início perdemos a referência do nó e ele retorna undefined
+            return this.minNode(node.left); // Sem o return no início perdemos a referência do nó, retornando undefined
         }
         */
 
-        // Opção 2
+        // Opção 2 (Mais perfomático por se trata de estrutura de repetição)
         let current = node;
         while (current != null && current.left != null) {
             current = current.left;
@@ -150,6 +150,7 @@ class BinarySearchTree {
 
     // método auxiliar que recebe nó root da árvore para remover uma key na árvore; deveria ser privado
     removeNode(node, key) {
+
         if (node == null) {
             return null;
         }
@@ -213,5 +214,95 @@ tree.insert(6);
 // console.log(tree.min());
 // console.log(tree.max());
 
-console.log(tree.search(1) ? 'Chave 1 encontrada' : 'Chave 1 não encontrada');
-console.log(tree.search(8) ? 'Chave 8 encontrada' : 'Chave 8 não encontrada');
+// console.log(tree.search(1) ? 'Chave 1 encontrada' : 'Chave 1 não encontrada');
+// console.log(tree.search(8) ? 'Chave 8 encontrada' : 'Chave 8 não encontrada');
+
+//caso1 remoção
+// console.log(tree.search(6) ? 'Chave 6 encontrada' : 'Chave 6 não encontrada');
+// tree.remove(6);
+// console.log(tree.search(6) ? 'Chave 6 encontrada' : 'Chave 6 não encontrada');
+
+//caso2 remoção
+// console.log(tree.search(5) ? 'Chave 5 encontrada' : 'Chave 5 não encontrada');
+// tree.remove(5);
+// console.log(tree.search(5) ? 'Chave 5 encontrada' : 'Chave 5 não encontrada');
+// console.log(tree.search(3) ? 'Chave 3 encontrada' : 'Chave 3 não encontrada');
+
+//caso3 remoção
+// console.log(tree.search(15) ? 'Chave 15 encontrada' : 'Chave 15 não encontrada');
+// tree.remove(15);
+// console.log(tree.search(15) ? 'Chave 15 encontrada' : 'Chave 15 não encontrada');
+
+
+// Classe árvore autobalanceada. 
+// Tenta sempre balancear assim que um nó é add ou rem.
+const BalanceFactor = {
+    UNBALANCED_RIGHT: 1,
+    SLIGHTLY_UNBALANCED_RIGHT: 2,
+    BALANCED: 3,
+    SLIGHTLY_UNBALANCED_LEFT: 4,
+    UNBALANCED_LEFT: 5
+};
+
+class AVLTree extends BinarySearchTree {
+    constructor(compareFn = defaultCompare) {
+        super(compareFn);
+    }
+
+    // calcular a altura de um nó
+    getNodeHeight(node) {
+        if (node == null) {
+            return -1;
+        }
+
+        return Math.max(
+            this.getNodeHeight(node.left), this.getNodeHeight(node.right)
+        ) + 1;
+    }
+
+    // calcula o fator de balanceamento de um nó
+    getBalanceFactor(node) {
+        const heightDifference = this.getNodeHeight(node.left) - this.getNodeHeight(node.right);
+
+        switch (heightDifference) {
+            case -2:
+                return BalanceFactor.UNBALANCED_RIGHT;
+            case -1:
+                return BalanceFactor.SLIGHTLY_UNBALANCED_RIGHT;
+            case 1:
+                return BalanceFactor.SLIGHTLY_UNBALANCED_LEFT;
+            case 2:
+                return BalanceFactor.UNBALANCED_LEFT;
+            default:
+                return BalanceFactor.BALANCED;
+        }
+    }
+
+    // método auxiliar para rotacionar simples à direita; deveria ser privado
+    rotationLL(node) {
+        const tmp = node.left;
+        node.left = tmp.right;
+        tmp.right = node;
+        return tmp;
+    }
+
+    // método auxiliar para rotacionar simples à esquerda; deveria ser privado
+    rotationRR(node) {
+        const tmp = node.right;
+        node.right = tmp.left;
+        tmp.left = node;
+        return tmp;
+    }
+
+    // método auxiliar para rotacionar dupla à direita; deveria ser privado
+    rotationLR(node) {
+        node.left = this.rotationRR(node.left);
+        return this.rotationLL(node);
+    }
+
+    // método auxiliar para rotacionar dupla à esqueda; deveria ser privado
+    rotationRL(node) {
+        node.right = this.rotationLL(node.right);
+        return this.rotationRR(node);
+    }
+}

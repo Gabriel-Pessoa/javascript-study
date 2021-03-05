@@ -39,7 +39,6 @@ import { MatNativeDateModule } from '@angular/material/core';
         MatTabsModule,
         MatCardModule,
         MatListModule,
-        MatCardModule,
         MatExpansionModule,
         MatRadioModule,
         MatInputModule,
