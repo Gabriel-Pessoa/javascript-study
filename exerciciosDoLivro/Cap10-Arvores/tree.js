@@ -188,21 +188,9 @@ class BinarySearchTree {
 }
 
 const tree = new BinarySearchTree();
-tree.insert(11);
-tree.insert(7);
-tree.insert(15);
-tree.insert(5);
 tree.insert(3);
-tree.insert(9);
-tree.insert(8);
-tree.insert(10);
-tree.insert(13);
-tree.insert(12);
-tree.insert(14);
-tree.insert(20);
-tree.insert(18);
-tree.insert(25);
-tree.insert(6);
+tree.insert(2);
+tree.insert(1);
 
 //const printNode = value => console.log(value);
 // tree.inOrderTraverse(printNode);
@@ -236,6 +224,7 @@ tree.insert(6);
 
 // Classe árvore autobalanceada. 
 // Tenta sempre balancear assim que um nó é add ou rem.
+// Ideal para operações de buscas (inserções e remoções são menos frequente).
 const BalanceFactor = {
     UNBALANCED_RIGHT: 1,
     SLIGHTLY_UNBALANCED_RIGHT: 2,
@@ -247,6 +236,52 @@ const BalanceFactor = {
 class AVLTree extends BinarySearchTree {
     constructor(compareFn = defaultCompare) {
         super(compareFn);
+
+        // Sobrescrevendo atributos
+        // this.compareFn = compareFn;
+        //this.root = null;
+    }
+
+    //inserir nó (key) na árvore
+    insert(key) {
+        this.root = this.insertNode(this.root, key);
+    }
+
+    // método auxiliar para add key a árvore; deveria ser privado
+    insertNode(node, key) {
+
+        if (node == null) {  // primeiro nó
+            return new Node(key);
+        } // qualquer posição que não seja root
+        else if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
+            node.left = this.insertNode(node.left, key);
+        }
+        else if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) {
+            node.right = this.insertNode(node.right, key);
+        }
+        else {
+            return node; // chave duplicada
+        }
+
+        // balanceia a árvore, se for necessário
+        const balanceFactor = this.getBalanceFactor(node);
+        if (balanceFactor === BalanceFactor.UNBALANCED_LEFT) {
+            if (this.compareFn(key, node.left.key) === Compare.LESS_THAN) {
+                node = this.rotationLL(node);
+            } else {
+                return this.rotationLR(node);
+            }
+        }
+
+        if (balanceFactor === BalanceFactor.UNBALANCED_RIGHT) {
+            if (this.compareFn(key, node.right.key) === Compare.BIGGER_THAN) {
+                node = this.rotationRR(node);
+            } else {
+                return this.rotationRL(node);
+            }
+        }
+
+        return node;
     }
 
     // calcular a altura de um nó
@@ -304,5 +339,177 @@ class AVLTree extends BinarySearchTree {
     rotationRL(node) {
         node.right = this.rotationLL(node.right);
         return this.rotationRR(node);
+    }
+}
+
+
+// Árvore rubronegra. 
+// Ideal para muitas inserções. 
+const Colors = {
+    RED: 0,
+    BLACK: 1
+};
+
+// criando nó específico para árvore RedBlack
+class RedBlackNode extends Node {
+    constructor(key) {
+        super(key);
+        //this.key = key; // herdando atributo da classe pai
+
+        //add atributos na classe filho (atual)
+        this.color = Colors.RED; //por padrão a cor é vermelha; mais comum.
+        this.parent = null;
+    }
+
+    isRed() {
+        return this.color === Colors.RED;
+    }
+}
+
+class RedBlackTree extends BinarySearchTree {
+    constructor(compareFn = defaultCompare) {
+        super(compareFn);
+
+        // herdando atributos da classe pai
+        // this.compareFn = compareFn;
+        //this.root = null;
+    }
+
+    // Sobrescrevendo método da classe pai
+    insert(key) {
+        if (this.root == null) { // árvore vazia
+            this.root = new RedBlackNode(key); // primeira key
+            this.root.color = Colors.BLACK; // de acordo com a regra o primeiro nó é preto
+        } else {
+            const newNode = this.insertNode(this.root, key); // inserção recursiva
+            this.fixTreeProperties(newNode); // verifica a árvore para ver se as regras estão sendo respeitadas
+        }
+    }
+
+    //Sobrescrevendo método auxiliar da classe pai
+    // método auxiliar para inserir key; deveria ser privado
+    insertNode(node, key) {
+        if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
+            if (node.left == null) {
+                node.left = new RedBlackNode(key);
+                node.left.parent = node; // mantendo uma referência ao pai do nó inserido
+                return node.left; // para verificar as propriedades em seguida
+            } else {
+                return this.insertNode(node.left, key);
+            }
+        }
+        else if (node.right == null) {
+            node.right = new RedBlackNode(key);
+            node.right.parent = node; // mantendo uma referência ao pai do nó inserido
+            return node.right; // para verificar as propriedades em seguida
+        }
+        else {
+            return this.insertNode(node.right, key);
+        }
+
+    }
+
+    fixTreeProperties(node) {
+        while (node && node.parent
+            && node.parent.color === Colors.RED
+            && node.color !== Colors.BLACK) {
+
+            let parent = node.parent; // pai
+            const grandParent = parent.parent; // avô
+
+            // caso A: o pai é o filho à esquerda
+            if (grandParent && grandParent.left === parent) {
+                const uncle = grandParent.right;
+
+                // caso 1A: tio do nó é vermelho - recolorir
+                if (uncle && uncle.isRed()) {
+                    grandParent.color = Colors.RED;
+                    parent.color = Colors.BLACK;
+                    uncle.color = Colors.BLACK;
+                    node = grandParent;
+                }
+                else {
+                    // caso 2A: nó é o filho à direita - rotação à esquerda
+                    if (node === parent.right) {
+                        this.rotationRR(parent);
+                        node = parent;
+                        parent = node.parent;
+                    }
+                    // caso 3A: nó é o filho à esquerda - rotação à direita
+                    this.rotationLL(grandParent);
+                    parent.color = Colors.BLACK;
+                    grandParent.color = Colors.RED;
+                    node = parent;
+                }
+
+            } else { // caso B: o pai é o filho à direita
+
+                const uncle = grandParent.left; // tio
+
+                // caso 1B: o tio é vermelho - recolorir
+                if (uncle && uncle.isRed()) {
+                    grandParent.color = Colors.RED;
+                    parent.color = Colors.BLACK;
+                    uncle.color = Colors.BLACK;
+                    node = grandParent;
+                }
+                else {
+                    // caso 2B: o nó é o filho à esquerda - rotação à direita
+                    if (node === parent.left) {
+                        this.rotationLL(parent);
+                        node = parent;
+                        parent = node.parent;
+                    }
+                    // caso 3B: o nó é o filho à direita - rotação à esquerda
+                    this.rotationRR(grandParent);
+                    parent.color = Colors.BLACK;
+                    grandParent.color = Colors.RED;
+                    node = parent;
+                }
+            }
+        }
+        this.root.color = Colors.BLACK;
+    }
+
+    // método auxiliar rotação esquerda-esquerda (rotação à direita); deveria ser privado
+    rotationLL(node) {
+        const tmp = node.left;
+        node.left = tmp.right;
+        if (tmp.right && tmp.right.key) {
+            tmp.right.parent = node;
+        }
+        tmp.parent = node.parent;
+        if (!node.parent) {
+            this.root = tmp;
+        } else {
+            if (node === node.parent.left) {
+                node.parent.left = tmp;
+            } else {
+                node.parent.right = tmp;
+            }
+        }
+        tmp.right = node;
+        node.parent = tmp;
+    }
+
+    // método auxiliar rotação direita-direita (rotação à esquerda); deveria ser privado
+    rotationRR(node) {
+        const tmp = node.right;
+        node.right = tmp.left;
+        if (tmp.left && tmp.left.key) {
+            tmp.left.parent = node;
+        }
+        tmp.parent = node.parent; //null
+        if (!node.parent) {
+            this.root = tmp;
+        } else {
+            if (node === node.parent.left) {
+                node.parent.left = tmp;
+            } else {
+                node.parent.right = tmp;
+            }
+        }
+        tmp.left = node;
+        node.parent = tmp;
     }
 }
