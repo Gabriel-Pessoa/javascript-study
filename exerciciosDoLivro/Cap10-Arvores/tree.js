@@ -1,4 +1,4 @@
-const { Node } = require('./util');
+const { Node, BalanceFactor, Colors, RedBlackNode } = require('./util');
 const { Compare, defaultCompare } = require('../cap6-listaLigadas/util');
 
 
@@ -225,14 +225,6 @@ tree.insert(1);
 // Classe árvore autobalanceada. 
 // Tenta sempre balancear assim que um nó é add ou rem.
 // Ideal para operações de buscas (inserções e remoções são menos frequente).
-const BalanceFactor = {
-    UNBALANCED_RIGHT: 1,
-    SLIGHTLY_UNBALANCED_RIGHT: 2,
-    BALANCED: 3,
-    SLIGHTLY_UNBALANCED_LEFT: 4,
-    UNBALANCED_LEFT: 5
-};
-
 class AVLTree extends BinarySearchTree {
     constructor(compareFn = defaultCompare) {
         super(compareFn);
@@ -345,27 +337,6 @@ class AVLTree extends BinarySearchTree {
 
 // Árvore rubronegra. 
 // Ideal para muitas inserções. 
-const Colors = {
-    RED: 0,
-    BLACK: 1
-};
-
-// criando nó específico para árvore RedBlack
-class RedBlackNode extends Node {
-    constructor(key) {
-        super(key);
-        //this.key = key; // herdando atributo da classe pai
-
-        //add atributos na classe filho (atual)
-        this.color = Colors.RED; //por padrão a cor é vermelha; mais comum.
-        this.parent = null;
-    }
-
-    isRed() {
-        return this.color === Colors.RED;
-    }
-}
-
 class RedBlackTree extends BinarySearchTree {
     constructor(compareFn = defaultCompare) {
         super(compareFn);
@@ -499,7 +470,7 @@ class RedBlackTree extends BinarySearchTree {
         if (tmp.left && tmp.left.key) {
             tmp.left.parent = node;
         }
-        tmp.parent = node.parent; //null
+        tmp.parent = node.parent;
         if (!node.parent) {
             this.root = tmp;
         } else {
@@ -513,3 +484,12 @@ class RedBlackTree extends BinarySearchTree {
         node.parent = tmp;
     }
 }
+
+
+const redBlackTree = new RedBlackTree();
+
+redBlackTree.insert(1);
+redBlackTree.insert(2);
+redBlackTree.insert(3);
+redBlackTree.insert(4);
+redBlackTree.insert(5);
