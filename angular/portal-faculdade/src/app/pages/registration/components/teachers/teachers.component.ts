@@ -14,7 +14,7 @@ import { Teacher } from 'src/app/shared/models/teacher';
 })
 export class TeachersComponent implements OnInit {
 
-  data$: Observable<Teacher[]>
+  data$: Observable<Teacher[]>;
   teacher: FormGroup;
 
   constructor(public validate: ValidateFormService,

@@ -1,8 +1,8 @@
-.container-template .content {
+.template-container .content {
     grid-area: content;
 }
 
-.container-template {
+.template-container {
     height: 100vh;
     
     display: grid;

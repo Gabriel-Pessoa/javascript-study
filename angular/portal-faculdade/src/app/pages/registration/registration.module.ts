@@ -20,7 +20,10 @@ import { ComponentsModule } from 'src/app/shared/components/components.module';
   imports: [
     CommonModule,
     RouterModule.forChild([
-      { path: '', component: TabsComponent }
+      {
+        path: '',
+        component: TabsComponent,
+      }
     ]),
     MatTabsModule,
     MatCardModule,

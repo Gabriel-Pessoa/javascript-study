@@ -7,5 +7,5 @@
 }
 
 .footer mat-toolbar {
-    background-color: #ffcd00;
+    background-color: var(--primary-color);
 }

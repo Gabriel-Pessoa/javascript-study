@@ -23,10 +23,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.qtyTeacher$ = this.db.getTeachers().pipe(
-      reduce<Teacher[], number>((acc, curr) => curr.length, 0)
+      reduce<Teacher[], number>((_, curr) => curr.length, 0)
     );
     this.qtyStudent$ = this.db.getStudents().pipe(
-      reduce<Student[], number>((acc, curr) => curr.length, 0)
+      reduce<Student[], number>((_, curr) => curr.length, 0)
     );
   }
 

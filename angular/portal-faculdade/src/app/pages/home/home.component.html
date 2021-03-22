@@ -6,7 +6,7 @@
             <mat-icon mat-list-icon>people</mat-icon>
             <h4 mat-line>Quantidade</h4>
             <p mat-line>
-                <mat-spinner *ngIf="!(qtyTeacher$ | async)" diameter="50"></mat-spinner>
+                <mat-spinner *ngIf="!(qtyTeacher$ | async)" diameter="20"></mat-spinner>
                 {{qtyTeacher$ | async}}
             </p>
         </mat-list-item>
@@ -18,7 +18,7 @@
             <mat-icon mat-list-icon>people</mat-icon>
             <h4 mat-line>Quantidade</h4>
             <p mat-line>
-                <mat-spinner *ngIf="!(qtyStudent$ | async)" diameter="50"></mat-spinner>
+                <mat-spinner *ngIf="!(qtyStudent$ | async)" diameter="20"></mat-spinner>
                 {{qtyStudent$ | async}}
             </p>
         </mat-list-item>
