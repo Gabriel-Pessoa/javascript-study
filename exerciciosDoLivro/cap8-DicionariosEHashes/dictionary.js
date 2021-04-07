@@ -150,3 +150,5 @@ class Dictionary {
 // dictionary.forEach((k, v) => {
 //     console.log('forEach: ', `key: ${k}, value: ${v}`);
 // });
+
+module.exports = { Dictionary }
