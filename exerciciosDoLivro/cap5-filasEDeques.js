@@ -40,7 +40,7 @@ class Queue {
         return this.count - this.lowestCount;
     }
 
-    // método que limpa e retorna ao estado inicial a fila
+    // método que limpa retornando ao estado inicial a fila
     clear() {
         this.items = {};
         this.count = 0;
@@ -218,39 +218,39 @@ class Deque {
 
 
 // função que simula o jogo Batata Quente usando a classe de fila Queue
-function hotPotato(elementsList, num) {
-    const queue = new Queue();
+// function hotPotato(elementsList, num) {
+//     const queue = new Queue();
 
-    const elimitatedList = [];
+//     const elimitatedList = [];
 
-    for (let i = 0; i < elementsList.length; i++) {
-        // percorre a lista de array, add cada elemento ao final da fila.
-        // Enfilerando a lista
-        queue.enqueue(elementsList[i]);
-    }
+//     for (let i = 0; i < elementsList.length; i++) {
+//         // percorre a lista de array, add cada elemento ao final da fila.
+//         // Enfilerando a lista
+//         queue.enqueue(elementsList[i]);
+//     }
 
-    while (queue.size() > 1) { // maior que 1, pq tem que sobrar o vencedor
+//     while (queue.size() > 1) { // maior que 1, pq tem que sobrar o vencedor
 
-        //o número passado como segundo argumento determina quantas repetições terá o laço
-        for (let i = 0; i < num; i++) {
-            //remove e retorna os primeiros elemento da fila, add novamente ao final,
-            // Formando uma fila circular e simulando o jogo batata quente.
-            queue.enqueue(queue.dequeue());
-        }
-        // após laço for ser finalizado, remove e retorna o primeiro elemento da fila, adicionando-o ao array.
-        // Simulando o candidato que foi elimando nessa roda do jogo batata quente.
-        elimitatedList.push(queue.dequeue());
+//         //o número passado como segundo argumento determina quantas repetições terá o laço
+//         for (let i = 0; i < num; i++) {
+//             //remove e retorna os primeiros elemento da fila, add novamente ao final,
+//             // Formando uma fila circular e simulando o jogo batata quente.
+//             queue.enqueue(queue.dequeue());
+//         }
+//         // após laço for ser finalizado, remove e retorna o primeiro elemento da fila, adicionando-o ao array.
+//         // Simulando o candidato que foi elimando nessa roda do jogo batata quente.
+//         elimitatedList.push(queue.dequeue());
 
-        //repete todo o laço while, até que o tamanho da fila seja de apenas 1 elemento.
-        // Se inicia mais uma rodada do jogo. Até que haja um vencedor.
-    }
+//         //repete todo o laço while, até que o tamanho da fila seja de apenas 1 elemento.
+//         // Se inicia mais uma rodada do jogo. Até que haja um vencedor.
+//     }
 
-    // Retorna um objeto que tem duas propriedades.
-    return {
-        eliminated: elimitatedList, // lista de elementos eliminados.
-        winner: queue.dequeue() // único elemento vencedor.
-    };
-}
+//     // Retorna um objeto que tem duas propriedades.
+//     return {
+//         eliminated: elimitatedList, // lista de elementos eliminados.
+//         winner: queue.dequeue() // único elemento vencedor.
+//     };
+// }
 
 // const names = ['John', 'Jack', 'Camila', 'Ingrid', 'Carl'];
 
@@ -261,38 +261,39 @@ function hotPotato(elementsList, num) {
 // console.log(`O vencedor é: ${result.winner}`);
 
 
-function palindromeChecker(aString) {
-    // verificação para saber se string passada como argumento é válida.
-    // sai da função retornando um false
-    if (aString === undefined || aString === null ||
-        (aString !== null && aString.length === 0)) {
-        return false;
-    }
-    const deque = new Deque();
-    // transformando toda a string em minúsculo e tirando todos os espaços
-    const lowerString = aString.toLocaleLowerCase().split(' ').join('');
+// function palindromeChecker(aString) {
+//     // verificação para saber se string passada como argumento é válida.
+//     // sai da função retornando um false
+//     if (aString === undefined || aString === null ||
+//         (aString !== null && aString.length === 0)) {
+//         return false;
+//     }
+//     const deque = new Deque();
+//     // transformando toda a string em minúsculo e tirando todos os espaços
+//     const lowerString = aString.toLocaleLowerCase().split(' ').join('');
 
-    let isEqual = true;
-    let firstChar, lastChar;
+//     let isEqual = true;
+//     let firstChar, lastChar;
 
-    for (let i = 0; i < lowerString.length; i++) {
-        deque.addBack(lowerString.charAt(i)); // add cada caractere a fila
-    }
+//     for (let i = 0; i < lowerString.length; i++) {
+//         deque.addBack(lowerString.charAt(i)); // add cada caractere a fila
+//     }
 
-    while (deque.size() > 1 && isEqual) { //quando size <= 1 ou isQual == false, sai do laço.
-        firstChar = deque.removeFront();// remove o primeiro elemento
-        lastChar = deque.removeBack(); // remove o último elemento
-        if (firstChar !== lastChar) { // comparativo, se for diferente: setar variável para false;
-            isEqual = false;
-        }
-    }
-    return isEqual; // retorna um boolean
-}
+//     while (deque.size() > 1 && isEqual) { //quando size <= 1 ou isQual == false, sai do laço.
+//         firstChar = deque.removeFront();// remove o primeiro elemento
+//         lastChar = deque.removeBack(); // remove o último elemento
+//         if (firstChar !== lastChar) { // comparativo, se for diferente: setar variável para false;
+//             isEqual = false;
+//         }
+//     }
+//     return isEqual; // retorna um boolean
+// }
 
-console.log('a', palindromeChecker('a'));
-console.log('aa', palindromeChecker('aa'));
-console.log('kayak', palindromeChecker('kayak'));
-console.log('level', palindromeChecker('level'));
-console.log('Was it a car or a cat I saw', palindromeChecker('Was it a car or a cat I saw'));
-console.log('Step on no pets', palindromeChecker('Step on no pets'));
+// console.log('a', palindromeChecker('a'));
+// console.log('aa', palindromeChecker('aa'));
+// console.log('kayak', palindromeChecker('kayak'));
+// console.log('level', palindromeChecker('level'));
+// console.log('Was it a car or a cat I saw', palindromeChecker('Was it a car or a cat I saw'));
+// console.log('Step on no pets', palindromeChecker('Step on no pets'));
 
+module.exports = { Queue };

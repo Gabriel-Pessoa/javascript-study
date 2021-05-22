@@ -1,4 +1,4 @@
-const { Dictionary } = require('./cap8-DicionariosEHashes/dictionary');
+const { Dictionary } = require('../cap8-DicionariosEHashes/dictionary');
 
 class Graph {
     constructor(isDirected = false) { // recebe parâmetro para grafo direcionado ou não; por padrão: não.
@@ -59,7 +59,6 @@ class Graph {
 }
 
 const graph = new Graph();
-
 const myVertices = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
 
 for (let i = 0; i < myVertices.length; i++) {
@@ -77,4 +76,7 @@ graph.addEdge('B', 'E');
 graph.addEdge('B', 'F');
 graph.addEdge('E', 'I');
 
-console.log(graph.toString());
+// Teste
+// console.log(graph.toString());
+
+module.exports = { graph, myVertices };

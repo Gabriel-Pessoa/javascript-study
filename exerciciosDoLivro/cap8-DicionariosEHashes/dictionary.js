@@ -39,7 +39,7 @@ class Dictionary {
     // Devolve o valor específico baseado na chave
     get(key) {
         const valuePair = this.table[this.toStrFn(key)]; // Obtendo  o objeto armazenado na propriedade específica.
-        return valuePair == null ? undefined : valuePair.value; // Se propriedade == null ou undefined, devolve undefined; senão valuePair.value
+        return valuePair == null ? undefined : valuePair.value; // Se propriedade === null ou undefined, devolve undefined; senão valuePair.value
 
         /*
             Segunda opção, com um custo maior de processamento, faz a consulta ao objeto table duas vezes:
