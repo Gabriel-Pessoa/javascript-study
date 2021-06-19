@@ -1,5 +1,6 @@
 const { graph, myVertices } = require('./cap12-grafos');
 const { Queue } = require('../cap5-filasEDeques');
+const { Stack } = require('../cap4-pilhas')
 
 const Colors = {
     WHITE: 0, // vértice não visitado (not visited)
@@ -37,13 +38,76 @@ const breadthFirstSearch = (graph, startVertex, callback) => {
             }
         }
 
-        color[u] = Colors.BLACK;
-        if (callback) {
-            callback(u);
+        color[u] = Colors.BLACK; // marca vértice como totalmente explorado
+        if (callback) { // se o parâmetro "callback" da função breadthFirstSearch estiver setado
+            callback(u); // invoca a função, passando como parâmetro o vértice atual
         }
     }
 }
 
-const printVertex = (value) => console.log('Vértice visitado: ', value);
+//const printVertex = (value) => console.log('Vértice visitado: ', value);
+//breadthFirstSearch(graph, myVertices[0], printVertex);
 
-breadthFirstSearch(graph, myVertices[0], printVertex);
+const BFSToDistance = (graph, startVertex) => {
+    const vertices = graph.getVertices();
+    const adjList = graph.getAdjList();
+    const color = initializeColor(vertices);
+    const queue = new Queue();
+    const distances = {}; 
+    const predecessors = {}; 
+    queue.enqueue(startVertex);
+
+    // itera por toda a lista de vertice
+    for (let i = 0; i < vertices.length; i++) {
+        // inicializa os objetos distances e predecessors com seus valores correspondente
+        /*
+            distances: { v: 0 }
+            predecessors: { v: null }
+        */
+        distances[vertices[i]] = 0;
+        predecessors[vertices[i]] = null;
+    }
+
+    while (!queue.isEmpty()) {
+        const u = queue.dequeue();
+        const neighbors = adjList.get(u);
+        color[u] = Colors.GREY;
+
+        for (let i = 0; i < neighbors.length; i++) {
+            const w = neighbors[i];
+            if (color[w] === Colors.WHITE) {
+                color[w] = Colors.GREY;
+                distances[w] = distances[u] + 1;
+                predecessors[w] = u;
+                queue.enqueue(w);
+            }
+        }
+        color[u] = Colors.BLACK;
+    }
+
+    return {
+        distances,
+        predecessors
+    };
+}
+
+const shortesPathA = BFSToDistance(graph, myVertices[0])
+//console.log(shortesPathA);
+
+const fromVertex = myVertices[0];
+
+for (let i = 1; i < myVertices.length; i++) {
+    const toVertex = myVertices[i];
+    const path = new Stack();
+
+    for (let v = toVertex; v !== fromVertex; v = shortesPathA.predecessors[v]) {
+        path.push(v);
+    }
+    path.push(fromVertex)
+    let s = path.pop();
+
+    while (!path.isEmpty()) {
+        s += ' - ' + path.pop();
+    }
+    console.log(s);
+}

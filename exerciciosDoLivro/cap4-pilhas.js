@@ -218,3 +218,4 @@ function baseConverter(decNumber, base) {
 
 const digits = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
+module.exports = { Stack }

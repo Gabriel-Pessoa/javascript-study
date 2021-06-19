@@ -28,7 +28,6 @@ class Graph {
         // adquiri vértice v na lista e add vértice w como sua adjacência
         this.adjList.get(v).push(w);
 
-
         // caso grafo não direcionado
         if (!this.isDirected) {
             // faz o inverso tbm: adquiri vértice w na lista e add vértice v como sua adjacência
@@ -78,5 +77,6 @@ graph.addEdge('E', 'I');
 
 // Teste
 // console.log(graph.toString());
+console.log(graph.getVertices())
 
 module.exports = { graph, myVertices };
