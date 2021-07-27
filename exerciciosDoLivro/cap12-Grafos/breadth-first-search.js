@@ -1,20 +1,8 @@
 const { graph, myVertices } = require('./cap12-grafos');
 const { Queue } = require('../cap5-filasEDeques');
-const { Stack } = require('../cap4-pilhas')
+const { Stack } = require('../cap4-pilhas');
+const { Colors, initializeColor } = require('./utils');
 
-const Colors = {
-    WHITE: 0, // vértice não visitado (not visited)
-    GREY: 1, // vértice visitado, mas não explorado (visited, but not explored yet)
-    BLACK: 2 // vértice foi totalmente explorado
-};
-
-const initializeColor = vertices => {
-    const color = {};
-    for (let i = 0; i < vertices.length; i++) {
-        color[vertices[i]] = Colors.WHITE;
-    }
-    return color;
-}
 
 const breadthFirstSearch = (graph, startVertex, callback) => {
     const vertices = graph.getVertices();
@@ -26,7 +14,7 @@ const breadthFirstSearch = (graph, startVertex, callback) => {
 
     while (!queue.isEmpty()) {
         const u = queue.dequeue(); // remove e retorna o primeiro elemento da fila
-        const neighbors = adjList.get(u); // acessa a lista de adjacencia do vértice u
+        const neighbors = adjList.get(u); // acessa a lista de adjacência do vértice u
         color[u] = Colors.GREY; // marca vértice como visitado, mas não explorado
 
         // percorre a lista de vizinhos (vértices adjacente) do vértice u
@@ -34,7 +22,7 @@ const breadthFirstSearch = (graph, startVertex, callback) => {
             const w = neighbors[i]; // cada vizinho (vértice adjacente)
             if (color[w] === Colors.WHITE) { // se vértice ainda não visitado
                 color[w] = Colors.GREY; // marca vértice como visitado, mas não explorado
-                queue.enqueue(w); //add elemento ao final da fila, para acabar de explorá-lo quando for removido da fila (linha 27).
+                queue.enqueue(w); //add elemento ao final da fila, para acabar de explorá-lo quando for removido da fila (linha 17).
             }
         }
 
@@ -53,8 +41,8 @@ const BFSToDistance = (graph, startVertex) => {
     const adjList = graph.getAdjList();
     const color = initializeColor(vertices);
     const queue = new Queue();
-    const distances = {}; 
-    const predecessors = {}; 
+    const distances = {};
+    const predecessors = {};
     queue.enqueue(startVertex);
 
     // itera por toda a lista de vertice
@@ -92,22 +80,27 @@ const BFSToDistance = (graph, startVertex) => {
 }
 
 const shortesPathA = BFSToDistance(graph, myVertices[0])
-//console.log(shortesPathA);
+console.log(shortesPathA);
 
-const fromVertex = myVertices[0];
+const fromVertex = myVertices[0]; // vértice de origem
 
 for (let i = 1; i < myVertices.length; i++) {
-    const toVertex = myVertices[i];
-    const path = new Stack();
+    const toVertex = myVertices[i]; // vértice de destino atual
+    const path = new Stack(); // CUIDADO!!! Cria uma instância a cada iteração
 
     for (let v = toVertex; v !== fromVertex; v = shortesPathA.predecessors[v]) {
         path.push(v);
     }
-    path.push(fromVertex)
-    let s = path.pop();
+    path.push(fromVertex); // add vértice de origem para caminho completo
+    let vertexSequence = path.pop();
+    let s = vertexSequence;
+    let d = shortesPathA.distances[vertexSequence];
 
     while (!path.isEmpty()) {
-        s += ' - ' + path.pop();
+        vertexSequence = path.pop()
+        s += ' - ' + vertexSequence;
+        d = shortesPathA.distances[vertexSequence]; // ida e volta: d += shortesPath...
     }
-    console.log(s);
+    console.log("caminho: ", s);
+    console.log(`distância: ${d} \n`);
 }

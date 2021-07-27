@@ -77,6 +77,6 @@ graph.addEdge('E', 'I');
 
 // Teste
 // console.log(graph.toString());
-console.log(graph.getVertices())
+// console.log(graph.getVertices())
 
-module.exports = { graph, myVertices };
+module.exports = { Graph, graph, myVertices };
