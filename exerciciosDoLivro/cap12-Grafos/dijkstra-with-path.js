@@ -15,15 +15,37 @@ const minDistance = (dist, visited) => {
             minIndex = v;
         }
     }
-
     return minIndex;
+}
+
+const paths = (predecessors, size, src) => {
+    const route = [];
+    route[src] = 0;
+
+    for (let i = 1; i < size; i++) {
+        const toVertex = i;
+        const path = new Stack();
+
+        for (let v = toVertex; v !== src; v = predecessors[v]) {
+            path.push(v);
+        }
+
+        path.push(src);
+        let s = path.pop();
+
+        while (!path.isEmpty()) {
+            s += ' - ' + path.pop();
+        }
+
+        route[i] = s;
+    }
+    return route;
 }
 
 const dijkstra = (graph, src) => {
     const dist = [];
     const visited = [];
     const predecessors = {};
-    const route = {};
     const { length } = graph;
     // inicializa todos as distâncias (dist) como INF e visited como false.
     for (let i = 0; i < length; i++) {
@@ -32,7 +54,6 @@ const dijkstra = (graph, src) => {
     }
 
     dist[src] = 0; // definimos a distância do vértice de origem a partir de si mesmo como 0
-    route[src] = 0;
     predecessors[src] = null;
 
     for (let i = 0; i < length - 1; i++) { // encontramos o caminho mais curto para todos os vértices
@@ -53,24 +74,8 @@ const dijkstra = (graph, src) => {
         }
     }
 
-    // montagem caminho
-    for (let i = 1; i < length; i++) {
-        const toVertex = i;
-        const path = new Stack();
+    const route = paths(predecessors, length, src);
 
-        for (let v = toVertex; v !== src; v = predecessors[v]) {
-            path.push(v);
-        }
-
-        path.push(src);
-        let s = path.pop();
-
-        while (!path.isEmpty()) {
-            s += ' - ' + path.pop();
-        }
-
-        route[i] = s;
-    }
     // depois que todos os vértices forem processados, devolvemos o resultado contendo o valor do caminho mais curto a partir do vértice de origem (src) para todos os vértices
     return {
         route,
@@ -91,7 +96,7 @@ const graph = [
 const result = dijkstra(graph, 0);
 
 for (let i = 0; i < result.dist.length; i++) {
-    console.log(`caminho: ${result.route[i]}, distance: ${result.dist[i]}`);
+    console.log(`route: ${result.route[i]}, distance: ${result.dist[i]}`);
 }
 
 /* Ver pág. 323.
