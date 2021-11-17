@@ -1,4 +1,4 @@
-const { Colors, initializeColor } = require('./utils');
+const { Colors, initializeColor } = require('../utils');
 const { Graph, graph, myVertices } = require("./cap12-grafos");
 
 

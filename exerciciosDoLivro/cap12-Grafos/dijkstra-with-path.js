@@ -1,4 +1,4 @@
-/* Algoritmo de caminho mais curtos em um grafo. Esse é um algoritmo do tipo guloso (greedy algorithm), ou seja, segue um método
+/* Algoritmo de caminho mais curtos em um grafo. Esse é um algoritmo do tipo guloso (), ou seja, segue um método
     heurístico de resolução de problemas segundo o qual fazemos a escolha ideal (a melhor solução na ocasião) em cada etapa, na esperança
     de encontrar uma solução ideal global (a melhor solução global).
 */
@@ -18,9 +18,9 @@ const minDistance = (dist, visited) => {
     return minIndex;
 }
 
-const paths = (predecessors, size, src) => {
+const road = (predecessors, size, src) => {
     const route = [];
-    route[src] = 0;
+    route[src] = "0";
 
     for (let i = 1; i < size; i++) {
         const toVertex = i;
@@ -54,8 +54,7 @@ const dijkstra = (graph, src) => {
     }
 
     dist[src] = 0; // definimos a distância do vértice de origem a partir de si mesmo como 0
-    predecessors[src] = null;
-
+    
     for (let i = 0; i < length - 1; i++) { // encontramos o caminho mais curto para todos os vértices
         const u = minDistance(dist, visited); // para isso, devemos selecionar o vértice com distância mínima a partir do conjunto de vértices que ainda não foram processados
 
@@ -74,7 +73,7 @@ const dijkstra = (graph, src) => {
         }
     }
 
-    const route = paths(predecessors, length, src);
+    const route = road(predecessors, length, src);
 
     // depois que todos os vértices forem processados, devolvemos o resultado contendo o valor do caminho mais curto a partir do vértice de origem (src) para todos os vértices
     return {

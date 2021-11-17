@@ -1,7 +1,7 @@
 const { graph, myVertices } = require('./cap12-grafos');
 const { Queue } = require('../cap5-filasEDeques');
 const { Stack } = require('../cap4-pilhas');
-const { Colors, initializeColor } = require('./utils');
+const { Colors, initializeColor } = require('../utils');
 
 
 const breadthFirstSearch = (graph, startVertex, callback) => {

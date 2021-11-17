@@ -1,5 +1,5 @@
 const { graph } = require("./cap12-grafos");
-const { Colors, initializeColor } = require('./utils');
+const { Colors, initializeColor } = require('../utils');
 
 const depthFirstSearch = (graph, callback) => {
     const vertices = graph.getVertices();

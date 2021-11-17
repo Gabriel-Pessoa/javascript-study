@@ -1,7 +1,6 @@
 const { defaultToString, ValuePair } = require('./util');
 const { LinkedList } = require('../cap6-listaLigadas/linked-list');
 
-
 class HashTable {
 
     constructor(toStrFn = defaultToString) {

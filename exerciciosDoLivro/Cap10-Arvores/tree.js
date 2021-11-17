@@ -1,5 +1,5 @@
 const { Node, BalanceFactor, Colors, RedBlackNode } = require('./util');
-const { Compare, defaultCompare } = require('../cap6-listaLigadas/util');
+const { Compare, defaultCompare } = require('../utils');
 
 
 class BinarySearchTree {
@@ -192,12 +192,12 @@ tree.insert(3);
 tree.insert(2);
 tree.insert(1);
 
-//const printNode = value => console.log(value);
-// tree.inOrderTraverse(printNode);
-// console.log('-----------------');
-// tree.preOrderTraverse(printNode);
-// console.log('-----------------');
-// tree.postOrderTraverse(printNode);
+const printNode = value => console.log(value);
+tree.inOrderTraverse(printNode);
+console.log('-----------------');
+tree.preOrderTraverse(printNode);
+console.log('-----------------');
+tree.postOrderTraverse(printNode);
 
 // console.log(tree.min());
 // console.log(tree.max());

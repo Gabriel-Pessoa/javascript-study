@@ -1,5 +1,5 @@
 const { defaultCompare, Compare } = require('../cap6-listaLigadas/util');
-const { swap, reverseCompare } = require('./util');
+const { swap, reverseCompare } = require('../utils');
 
 
 class MinHeap {

@@ -1,4 +1,4 @@
-const { defaultEquals, Node, Compare, defaultCompare } = require('./util');
+const { defaultEquals, Node, Compare, defaultCompare } = require('../utils');
 
 class LinkedList {
     //constructor recebe uma função como argumento, caso não seja passado, assume função padrão.
@@ -152,10 +152,10 @@ class LinkedList {
     }
 }
 
-// const list = new LinkedList();
-// list.push(20);
-// list.push(25);
-// list.push(35);
+const list = new LinkedList();
+list.push(20);
+list.push(25);
+list.push(35);
 
 /* É uma extensão do node, acrescido de mais uma propriedade, que
     faz referência aos elementos anteriores de cada posição da lista
