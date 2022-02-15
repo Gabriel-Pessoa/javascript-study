@@ -164,7 +164,7 @@ class BinarySearchTree {
             return node;
         }
         else { // key é igual a node.key
-            // caso 1 
+            // caso 1
             if (node.left == null && node.right == null) {
                 node = null;
                 return node;
@@ -187,17 +187,17 @@ class BinarySearchTree {
     }
 }
 
-const tree = new BinarySearchTree();
-tree.insert(3);
-tree.insert(2);
-tree.insert(1);
+// const tree = new BinarySearchTree();
+// tree.insert(3);
+// tree.insert(2);
+// tree.insert(1);
 
-const printNode = value => console.log(value);
-tree.inOrderTraverse(printNode);
-console.log('-----------------');
-tree.preOrderTraverse(printNode);
-console.log('-----------------');
-tree.postOrderTraverse(printNode);
+// const printNode = value => console.log(value);
+// tree.inOrderTraverse(printNode);
+// console.log('-----------------');
+// tree.preOrderTraverse(printNode);
+// console.log('-----------------');
+// tree.postOrderTraverse(printNode);
 
 // console.log(tree.min());
 // console.log(tree.max());
@@ -222,7 +222,7 @@ tree.postOrderTraverse(printNode);
 // console.log(tree.search(15) ? 'Chave 15 encontrada' : 'Chave 15 não encontrada');
 
 
-// Classe árvore autobalanceada. 
+// Classe árvore autobalanceada.
 // Tenta sempre balancear assim que um nó é add ou rem.
 // Ideal para operações de buscas (inserções e remoções são menos frequente).
 class AVLTree extends BinarySearchTree {
@@ -334,9 +334,25 @@ class AVLTree extends BinarySearchTree {
     }
 }
 
+const avlTree = new AVLTree();
+avlTree.insert('T');
+avlTree.insert('N');
+avlTree.insert('D');
+avlTree.insert('A');
+avlTree.insert('B');
+avlTree.insert('R');
+avlTree.insert('X');
+avlTree.insert('G');
+avlTree.insert('P');
 
-// Árvore rubronegra. 
-// Ideal para muitas inserções. 
+
+avlTree.preOrderTraverse((node) => {
+    console.log(node)
+});
+
+
+// Árvore rubronegra.
+// Ideal para muitas inserções.
 class RedBlackTree extends BinarySearchTree {
     constructor(compareFn = defaultCompare) {
         super(compareFn);
@@ -486,10 +502,10 @@ class RedBlackTree extends BinarySearchTree {
 }
 
 
-const redBlackTree = new RedBlackTree();
+// const redBlackTree = new RedBlackTree();
 
-redBlackTree.insert(1);
-redBlackTree.insert(2);
-redBlackTree.insert(3);
-redBlackTree.insert(4);
-redBlackTree.insert(5);
+// redBlackTree.insert(1);
+// redBlackTree.insert(2);
+// redBlackTree.insert(3);
+// redBlackTree.insert(4);
+// redBlackTree.insert(5);

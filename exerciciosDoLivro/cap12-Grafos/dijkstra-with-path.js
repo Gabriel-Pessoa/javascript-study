@@ -39,6 +39,7 @@ const road = (predecessors, size, src) => {
 
         route[i] = s;
     }
+    
     return route;
 }
 
@@ -61,7 +62,7 @@ const dijkstra = (graph, src) => {
         visited[u] = true; // marcamos o vértices para não calculamos ele duas vezes
 
         for (let v = 0; v < length; v++) {
-            // caso o caminho mais curto seja encontrado, definimos o novo valor do caminho mais curto na linha 48
+            // caso o caminho mais curto seja encontrado, definimos o novo valor do caminho mais curto 
             if (!visited[v] &&
                 graph[u][v] !== 0 &&
                 dist[u] !== INF &&

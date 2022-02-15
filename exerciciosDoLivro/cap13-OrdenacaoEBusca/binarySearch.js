@@ -3,7 +3,8 @@ const { quickSort } = require('./quickSort');
 
 /**
  * Semelhante ao jogo de adivinhação de números: "Estou pensando em um número entre 1 e 100". Começamos respondendo
- * com um número, e a pessoa dirá "é maior", "é menor", ou dirá que acertamos.
+ * com um número, e a pessoa dirá "é maior", "é menor", ou dirá que acertamos. Temos uma implementação desse algoritmo
+ * também no capítulo 14
  */
 function binarySearch(array, value, compareFn = defaultCompare) {
     const sortedArray = quickSort(array); // começa-se ordenando o array
